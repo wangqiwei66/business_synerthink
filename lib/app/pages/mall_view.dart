@@ -183,11 +183,18 @@ class MallView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Row(
         children: [
-          const Text('為你推薦',
-              style: TextStyle(
-                  color: Colors.pink,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20)),
+          RichText(
+              text: const TextSpan(
+            text: '為你',
+            style: TextStyle(
+                color: Colors.pink, fontWeight: FontWeight.bold, fontSize: 20),
+            children: [
+              TextSpan(
+                text: '推薦',
+                style: TextStyle(color: Colors.purple, fontSize: 20),
+              ),
+            ],
+          )),
           const SizedBox(width: 16),
           Expanded(
             child: SizedBox(
@@ -240,11 +247,20 @@ class MallView extends StatelessWidget {
                 ),
               ),
               alignment: Alignment.center,
-              child: const Text('收費廣告欄',
-                  style: TextStyle(
-                      color: Colors.amber,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20)),
+              child: RichText(
+                  text: const TextSpan(
+                text: '收費',
+                style: TextStyle(
+                    color: Colors.amber,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
+                children: [
+                  TextSpan(
+                      text: '廣告欄',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold)),
+                ],
+              )),
             ),
             Expanded(
               child: Image.asset('assets/img/banner1.jpg', fit: BoxFit.cover),
@@ -350,17 +366,21 @@ class MallView extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                Text(
-                  logic.userName,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      logic.userName,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(Icons.diamond, color: Colors.white, size: 20),
+                  ],
                 ),
-                const SizedBox(width: 8),
-                const Icon(Icons.diamond, color: Colors.white, size: 20),
-                const SizedBox(height: 4),
+                // const SizedBox(height: 4),
                 const Row(
                   children: [
                     Text('組織名稱', style: TextStyle(color: Colors.white70)),
