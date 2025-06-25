@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'main_logic.dart';
+import 'mall_view.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -13,7 +14,7 @@ class _MainPageState extends State<MainPage> {
   final MainLogic logic = Get.put(MainLogic());
 
   final List<Widget> _pages = [
-    const Center(child: Text('商城', style: TextStyle(fontSize: 24))),
+    MallView(),
     const Center(child: Text('活動', style: TextStyle(fontSize: 24))),
     const Center(child: Text('AI 搜索', style: TextStyle(fontSize: 24))),
     const Center(child: Text('組織', style: TextStyle(fontSize: 24))),

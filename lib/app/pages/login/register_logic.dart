@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:tiny_weight/app/pages/main_view.dart';
+import 'package:tiny_weight/app/widgets/toast.dart';
 
 class RegisterLogic extends GetxController {
   final usernameController = TextEditingController();
@@ -28,7 +30,12 @@ class RegisterLogic extends GetxController {
       EasyLoading.showInfo('請先同意使用者條款');
       return;
     }
-    EasyLoading.showInfo('註冊功能待實現');
+    showLoading(text: '正在註冊...');
+    Future.delayed(const Duration(seconds: 2), () {
+      hideLoading();
+      EasyLoading.showSuccess('註冊成功');
+      Get.to(() => const MainPage(), transition: Transition.fadeIn);
+    });
   }
 
   void onTerms() {
