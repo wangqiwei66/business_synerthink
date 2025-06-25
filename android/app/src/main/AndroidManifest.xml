@@ -1,0 +1,78 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.business.synergy">
+    <!-- 添加网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!--拍照-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 检查网络可用性 -->
+    <!-- 访问网络状态, 检测网络的可用性. 需要网络运营商相关信息用于网络定位 -->
+    <uses-permission xmlns:android="http://schemas.android.com/apk/res/android"
+        android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 访问网络的变化, 需要某些信息用于网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <!-- 通过网络得到粗略位置 -->
+    <!-- <uses-permission xmlns:android="http://schemas.android.com/apk/res/android"
+        android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
+    <!-- 通过GPS得到精确位置 -->
+    <!-- <uses-permission xmlns:android="http://schemas.android.com/apk/res/android"
+        android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
+   <!-- 适用于 Android 10 及以下 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29"/>
+
+    <!-- 适用于 Android 11+（API 30+），推荐使用 Scoped Storage -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+
+   <application
+        android:allowBackup="true"
+        android:label="商聯思維"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        android:networkSecurityConfig="@xml/network_security_config">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <!-- Specifies an Android theme to apply to this Activity as soon as
+                 the Android process has started. This theme is visible to the user
+                 while the Flutter UI initializes. After that, this theme continues
+                 to determine the Window background behind the Flutter UI. -->
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"
+              />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+        android:name="com.jarvan.fluwx.wxapi.WXEntryActivity"
+        android:exported="true"
+        android:launchMode="singleTop"
+        android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="wx你的appid"/>
+            </intent-filter>
+        </activity>
+        <!-- Don't delete the meta-data below.
+             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2" />
+        <meta-data android:name="delivery_metrics_exported_to_big_query_enabled"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.android.gms.version.DEPENDENCIES"
+            android:value="optional" />
+    </application>
+</manifest>

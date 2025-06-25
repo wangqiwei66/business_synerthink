@@ -1,0 +1,12 @@
+{
+      "appName":"歡樂世界",
+      "login": "登入",
+      "sign_in": "註冊",
+      "logout": "註銷",
+      "sign_in_fb": "登入用 Facebook",
+      "sign_in_google": "登入用 Google",
+      "sign_in_apple": "登入用 Apple",
+      "add1":"點我加 1",
+      "please_login_first":"請先登入"
+
+}

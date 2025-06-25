@@ -1,0 +1,69 @@
+name: tiny_weight
+version: 0.0.14+14
+publish_to: none
+description: 商联思维 App.
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  card_swiper: ^3.0.1
+  cupertino_icons: ^1.0.2
+  get: ^4.6.1
+  flutter:
+    sdk: flutter
+  flutter_screenutil: ^5.1.1
+  flutter_easyrefresh: ^2.2.1
+  flutter_easyloading: ^3.0.3
+  qr_flutter: ^4.0.1
+  qr_code_scanner: ^1.0.1
+  webview_flutter: ^4.0.0
+  share_plus: ^10.0.0
+  url_launcher: ^6.2.6
+  shared_preferences: ^2.0.13
+  intl: ^0.17.0
+  flutter_animate: ^4.2.0
+  flutter_pickers: ^2.1.9
+  jwt_decode: ^0.3.1
+  flutter_swiper_view: ^1.1.8
+  cached_network_image: ^3.2.0
+  auto_size_text: ^3.0.0
+  dio: ^5.4.0
+  photo_view: ^0.14.0
+  table_calendar: ^3.0.8
+  get_storage: any
+  geocoding: ^2.0.5
+  animated_flip_counter: ^0.2.6
+  html_character_entities: ^1.0.0+1
+  package_info_plus: ^8.1.1
+  permission_handler: ^10.2.0
+  video_player: ^2.8.6
+  video_compress: ^3.1.2
+  video_thumbnail: ^0.5.3
+  flutter_image_compress: ^2.3.0
+  image_picker: ^1.1.1
+  signature: ^5.2.0
+  flutter_swiper_null_safety: ^1.0.2
+  flutter_staggered_grid_view: ^0.7.0
+  flutter_cupertino_datetime_picker: ^3.0.0
+  flutter_html: ^3.0.0-beta.2
+  fl_chart: ^0.65.0
+  shimmer: ^3.0.0
+  fluwx: ^5.5.2
+  flutter_launcher_icons: ^0.14.3
+dev_dependencies:
+  flutter_lints: ^2.0.1
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/img/
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/img/app_icon.png"
+#module:
+#    androidX: true

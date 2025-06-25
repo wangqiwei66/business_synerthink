@@ -1,0 +1,61 @@
+class SportSaveAiResultModel {
+  final String text;
+  final List<ExerciseData> exerciseData;
+  final int planCalories;
+  final int leaveCalories;
+  final String suggestion;
+
+  SportSaveAiResultModel({
+    required this.text,
+    required this.exerciseData,
+    required this.planCalories,
+    required this.leaveCalories,
+    required this.suggestion,
+  });
+
+  factory SportSaveAiResultModel.fromJson(Map<String, dynamic> json) {
+    return SportSaveAiResultModel(
+      text: json['text'] as String,
+      exerciseData: (json['exercise_data'] as List<dynamic>)
+          .map((e) => ExerciseData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      planCalories: json['plan_calories'] as int,
+      leaveCalories: json['leave_calories'] as int,
+      suggestion: json['suggestion'] as String,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'text': text,
+      'exercise_data': exerciseData.map((e) => e.toJson()).toList(),
+      'plan_calories': planCalories,
+      'leave_calories': leaveCalories,
+      'suggestion': suggestion,
+    };
+  }
+}
+
+class ExerciseData {
+  final String exerciseType;
+  final int calories;
+
+  ExerciseData({
+    required this.exerciseType,
+    required this.calories,
+  });
+
+  factory ExerciseData.fromJson(Map<String, dynamic> json) {
+    return ExerciseData(
+      exerciseType: json['exercise_type'] as String,
+      calories: json['calories'] as int,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'exercise_type': exerciseType,
+      'calories': calories,
+    };
+  }
+}

@@ -3,6 +3,7 @@
 # Files and directories created by pub
 .dart_tool/
 .packages
+.pub-cache/
 build/
 # If you're building an application, you may want to check-in your pubspec.lock
 pubspec.lock
@@ -23,5 +24,98 @@ doc/api/
 *.js.deps
 *.js.map
 
+# Flutter/Dart/Pub相关
 .flutter-plugins
 .flutter-plugins-dependencies
+.flutter-versions
+.melos_tool_version
+
+# Android相关
+**/android/**/gradle-wrapper.jar
+**/android/.gradle/
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/key.jks
+
+# iOS相关
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/Flutter/engine/
+**/ios/Pods/
+**/ios/Podfile.lock
+**/ios/.symlinks/
+**/ios/Runner.xcworkspace/
+**/ios/Runner.xcodeproj/project.xcworkspace/
+**/ios/Runner.xcodeproj/xcuserdata/
+**/ios/Runner.xcworkspace/xcuserdata/
+**/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# macOS相关
+**/macos/Flutter/ephemeral/
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Pods/
+**/macos/Podfile.lock
+**/macos/Runner.xcworkspace/
+**/macos/Runner.xcodeproj/project.xcworkspace/
+**/macos/Runner.xcodeproj/xcuserdata/
+**/macos/Runner.xcworkspace/xcuserdata/
+**/macos/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# Windows相关
+**/windows/flutter/ephemeral/
+**/windows/.vs/
+**/windows/CMakeLists.txt.user
+
+# Linux相关
+**/linux/flutter/ephemeral/
+**/linux/CMakeLists.txt.user
+
+# Web相关
+**/web/.dart_tool/
+
+# VS Code相关
+.vscode/
+
+# Xcode相关
+*.xcuserstate
+*.xcworkspace
+*.xcuserdata
+*.moved-aside
+*.xcuserdatad
+*.xcscmblueprint
+
+# IntelliJ/Android Studio相关
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# 其他常见忽略
+.DS_Store
+*.log
+*.tmp
+*.swp
+*.swo
+*.orig
+
+# 生成的JS文件
+*.dart.js
+*.info.json
+*.js
+*.js_
+*.js.deps
+*.js.map
+
+# 其他
+.svn/
+
+# 保留注释和原有内容
+# ...existing code...
