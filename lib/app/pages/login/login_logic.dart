@@ -3,6 +3,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/pages/main_view.dart';
 import 'package:tiny_weight/app/widgets/toast.dart';
+import 'package:tiny_weight/app/pages/login/register_view.dart';
 
 class LoginLogic extends GetxController {
   final usernameController = TextEditingController();
@@ -23,8 +24,8 @@ class LoginLogic extends GetxController {
   }
 
   void onRegister() {
-    // TODO: 跳轉到註冊頁
-    EasyLoading.showInfo('註冊功能待實現');
+    // 跳轉到註冊頁
+    Get.to(() => RegisterView(), transition: Transition.fadeIn);
   }
 
   void onTerms() {

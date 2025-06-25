@@ -9,7 +9,7 @@ import 'package:tiny_weight/app/common/shared_info.dart';
 import 'package:tiny_weight/app/common/webview/content_webview.dart';
 import 'package:tiny_weight/app/pages/common/scan_code_view.dart';
 import 'package:tiny_weight/app/pages/common/signature_page.dart';
-import 'package:tiny_weight/app/pages/login_view.dart';
+import 'package:tiny_weight/app/pages/login/login_view.dart';
 import 'package:tiny_weight/app/pages/main_view.dart';
 import 'package:tiny_weight/app/service/api_service.dart';
 import 'package:tiny_weight/app/models/user_info/user_info.dart';

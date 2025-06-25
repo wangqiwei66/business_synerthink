@@ -14,7 +14,7 @@ import 'package:tiny_weight/app/config/color.dart';
 import 'package:tiny_weight/app/config/const.dart';
 import 'package:tiny_weight/app/controllers/scan_controller.dart';
 import 'package:tiny_weight/app/controllers/user_controller.dart';
-import 'package:tiny_weight/app/pages/login_view.dart';
+import 'package:tiny_weight/app/pages/login/login_view.dart';
 import 'package:tiny_weight/app/pages/main_view.dart';
 import 'package:tiny_weight/app/service/api_service.dart';
 import 'package:tiny_weight/app/models/user_info/user_info.dart';
