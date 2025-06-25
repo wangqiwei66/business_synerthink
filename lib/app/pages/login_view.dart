@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiny_weight/app/common/widget_extention.dart';
 import 'package:tiny_weight/app/config/path.dart';
 import 'login_logic.dart';
 
@@ -47,7 +48,7 @@ class _LoginViewPageState extends State<LoginViewPage> {
                       ),
                     ],
                   ),
-                ),
+                ).animationSlideYFadein(),
                 const SizedBox(height: 8),
                 // 副標題
                 const Text(
@@ -58,7 +59,7 @@ class _LoginViewPageState extends State<LoginViewPage> {
                     fontWeight: FontWeight.w500,
                     letterSpacing: 2,
                   ),
-                ),
+                ).animationSlideYFadein(),
                 const SizedBox(height: 32),
                 // 登入表單
                 Container(
