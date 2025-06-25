@@ -82,6 +82,7 @@ class _LoginViewPageState extends State<LoginViewPage> {
                         height: 40,
                         child: TextField(
                           controller: logic.usernameController,
+                          keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             hintText: '用戶名稱 / 手提電話號碼',
                             filled: true,

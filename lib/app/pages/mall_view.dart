@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/widgets/scalable.dart';
+import 'package:tiny_weight/app/pages/side_menu_view.dart';
 import 'mall_logic.dart';
 
 class MallView extends StatelessWidget {
@@ -233,7 +234,7 @@ class MallView extends StatelessWidget {
         height: 80,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(color: Colors.blueAccent, width: 2),
+          // border: Border.all(color: Colors.blueAccent, width: 2),
         ),
         child: Row(
           children: [
@@ -350,8 +351,7 @@ class MallView extends StatelessWidget {
   Container _buildHeaderView() {
     return Container(
       color: Colors.black87,
-      padding: const EdgeInsets.fromLTRB(
-          16, 36, 16, 16), // symmetric(horizontal: 16, vertical: 36),
+      padding: const EdgeInsets.fromLTRB(16, 36, 16, 16),
       child: Row(
         children: [
           const CircleAvatar(
@@ -363,9 +363,7 @@ class MallView extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Text(
@@ -380,7 +378,6 @@ class MallView extends StatelessWidget {
                     const Icon(Icons.diamond, color: Colors.white, size: 20),
                   ],
                 ),
-                // const SizedBox(height: 4),
                 const Row(
                   children: [
                     Text('組織名稱', style: TextStyle(color: Colors.white70)),
@@ -408,7 +405,28 @@ class MallView extends StatelessWidget {
               IconButton(
                 icon: const Icon(Icons.keyboard_control,
                     color: Colors.pinkAccent),
-                onPressed: () {},
+                onPressed: () {
+                  showGeneralDialog(
+                    context: Get.context!,
+                    barrierLabel: 'side_menu',
+                    barrierDismissible: true,
+                    barrierColor: Colors.black54,
+                    transitionDuration: const Duration(milliseconds: 300),
+                    pageBuilder: (context, anim1, anim2) =>
+                        const SizedBox.shrink(),
+                    transitionBuilder: (context, anim1, anim2, child) {
+                      final offset = Tween<Offset>(
+                        begin: const Offset(1, 0),
+                        end: Offset.zero,
+                      ).animate(CurvedAnimation(
+                          parent: anim1, curve: Curves.easeOut));
+                      return SlideTransition(
+                        position: offset,
+                        child: const SideMenuView(),
+                      );
+                    },
+                  );
+                },
               ),
               IconButton(
                 icon: const Icon(Icons.mail_outline, color: Colors.pinkAccent),
