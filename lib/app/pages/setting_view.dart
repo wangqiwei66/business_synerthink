@@ -183,8 +183,8 @@ class SettingView extends StatelessWidget {
             Expanded(
               child: ConstrainedBox(
                 constraints: BoxConstraints(
-                  minHeight: 30.0 * maxLines,
-                  maxHeight: 30.0 * maxLines,
+                  minHeight: height,
+                  maxHeight: height,
                 ),
                 child: TextField(
                   style: const TextStyle(
@@ -213,7 +213,7 @@ class SettingView extends StatelessWidget {
                     hintStyle:
                         const TextStyle(color: Colors.grey, fontSize: 14),
                     contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                     border: OutlineInputBorder(
                       borderRadius: borderRadius,
                       borderSide: const BorderSide(color: Color(0xFFB2C6D6)),
@@ -302,7 +302,7 @@ class SettingView extends StatelessWidget {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(32),
                       borderSide:
-                          const BorderSide(color: Color(0xFF7C4DFF), width: 2),
+                          const BorderSide(color: Color(0xff9747ff), width: 2),
                     ),
                   ),
                 ),
