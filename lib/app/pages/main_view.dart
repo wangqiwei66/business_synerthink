@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiny_weight/app/pages/setting_view.dart';
 import 'main_logic.dart';
 import 'mall_view.dart';
 import 'ai_search_view.dart';
@@ -19,7 +20,7 @@ class _MainPageState extends State<MainPage> {
     const Center(child: Text('活動', style: TextStyle(fontSize: 24))),
     AiSearchView(),
     const Center(child: Text('組織', style: TextStyle(fontSize: 24))),
-    const Center(child: Text('設置', style: TextStyle(fontSize: 24))),
+    SettingView(),
   ];
 
   final List<BottomNavigationBarItem> _tabs = [
