@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/pages/userinfo_view.dart';
+import 'package:tiny_weight/app/widgets/textfeild.dart';
 import 'setting_logic.dart';
 
 class SettingView extends StatelessWidget {
@@ -41,14 +42,13 @@ class SettingView extends StatelessWidget {
                   _buildInputRow('商店行業類別', logic.shopTypeController,
                       hint: '10字元以內', maxInputCount: 10),
                   const SizedBox(height: 16),
-                  _buildInputRow('商店介紹', logic.shopDescController, maxLines: 3),
-                  const SizedBox(height: 16),
+                  _buildInputRow('商店介紹', logic.shopDescController,
+                      hint: '請輸入商店介紹文字', maxLines: 6),
                   _buildTagInput(),
-                  const SizedBox(height: 16),
                   _buildUploadHead(),
                   const SizedBox(height: 16),
                   _buildInputRow('您的商店地址', logic.shopAddressController,
-                      maxLines: 2),
+                      maxLines: 4),
                   const SizedBox(height: 16),
                   _buildInputRow('您的稱呼', logic.shopCallController),
                   const SizedBox(height: 16),
@@ -172,22 +172,28 @@ class SettingView extends StatelessWidget {
     final height = 30.0 * maxLines;
     final borderRadius =
         maxLines == 1 ? BorderRadius.circular(32) : BorderRadius.circular(12);
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.end,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(label,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 14)),
-              const SizedBox(height: 8),
-              SizedBox(
-                height: height,
+        Text(label,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+        const SizedBox(height: 8),
+        Row(
+          children: [
+            Expanded(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: 30.0 * maxLines,
+                  maxHeight: 30.0 * maxLines,
+                ),
                 child: TextField(
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                  ),
                   controller: controller,
                   maxLines: maxLines,
+                  minLines: maxLines,
                   maxLength: maxInputCount,
                   buildCounter: (
                     BuildContext context, {
@@ -206,8 +212,8 @@ class SettingView extends StatelessWidget {
                     hintText: hint ?? '請輸入文字，完成後按右方設定',
                     hintStyle:
                         const TextStyle(color: Colors.grey, fontSize: 14),
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 10),
+                    contentPadding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                     border: OutlineInputBorder(
                       borderRadius: borderRadius,
                       borderSide: const BorderSide(color: Color(0xFFB2C6D6)),
@@ -221,45 +227,44 @@ class SettingView extends StatelessWidget {
                       borderSide:
                           const BorderSide(color: Color(0xFF7C4DFF), width: 2),
                     ),
-                    isDense: true,
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 8),
-        Container(
-          height: 30,
-          padding: EdgeInsets.zero,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF5AD6FF), Color(0xFF2D9CFF), Color(0xFF7B6CFF)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
             ),
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(20),
+            const SizedBox(
+              width: 8,
+            ),
+            InkWell(
               onTap: onConfirm,
               child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                height: 40,
-                child: const Text(
-                  '設定',
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 2),
+                height: 30,
+                width: 50,
+                padding: EdgeInsets.zero,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFF5AD6FF),
+                      Color(0xFF2D9CFF),
+                      Color(0xFF7B6CFF)
+                    ],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                child: const Center(
+                  child: Text(
+                    '設定',
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 2),
+                  ),
                 ),
               ),
-            ),
-          ),
+            )
+          ],
         ),
       ],
     );
@@ -305,38 +310,32 @@ class SettingView extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
-              Container(
-                height: 30,
-                padding: EdgeInsets.zero,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Color(0xFF5AD6FF),
-                      Color(0xFF2D9CFF),
-                      Color(0xFF7B6CFF)
-                    ],
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
+              InkWell(
+                onTap: () {},
+                child: Container(
+                  height: 30,
+                  width: 50,
+                  padding: EdgeInsets.zero,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xFF5AD6FF),
+                        Color(0xFF2D9CFF),
+                        Color(0xFF7B6CFF)
+                      ],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
-                ),
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(20),
-                    onTap: () {},
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      height: 40,
-                      child: const Text(
-                        '設定',
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 2),
-                      ),
+                  child: const Center(
+                    child: Text(
+                      '設定',
+                      style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 2),
                     ),
                   ),
                 ),

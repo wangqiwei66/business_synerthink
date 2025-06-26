@@ -47,12 +47,15 @@ class CzTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = 30.0 * maxLines;
+    final borderRadius =
+        maxLines == 1 ? BorderRadius.circular(15) : BorderRadius.circular(15);
     return Container(
-      height: height ?? 40,
+      height: height,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: bgColor ?? const Color(0x33ffffff),
-        borderRadius: BorderRadius.circular(25.0),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -76,23 +79,27 @@ class CzTextField extends StatelessWidget {
               inputFormatters: [LengthLimitingTextInputFormatter(inputCount)],
               style: const TextStyle(
                 color: Colors.black,
-                fontSize: 16,
+                fontSize: 14,
               ),
               onSubmitted: onSubmitted,
               decoration: InputDecoration(
-                contentPadding: const EdgeInsets.only(top: 0, bottom: 0),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
                 border: OutlineInputBorder(
+                  borderRadius: borderRadius,
                   borderSide: BorderSide(
                     color: KColor.appbarColor,
                     width: 1.0,
                   ),
                 ),
-                enabledBorder: const OutlineInputBorder(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: borderRadius,
                   borderSide: BorderSide(
                     color: Colors.black45,
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
+                  borderRadius: borderRadius,
                   borderSide: BorderSide(
                     color: KColor.appbarColor,
                     width: 1.5,
@@ -102,7 +109,7 @@ class CzTextField extends StatelessWidget {
                 hintStyle: hitStyle ??
                     TextStyle(
                       color: Colors.grey[400],
-                      fontSize: 16,
+                      fontSize: 14,
                     ),
               ),
             ),
