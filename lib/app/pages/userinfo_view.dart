@@ -10,7 +10,7 @@ class UserInfoView extends StatelessWidget {
   Widget build(BuildContext context) {
     final logic = Get.find<MallLogic>();
     return Container(
-      color: Colors.black87,
+      color: const Color(0xFF363140),
       padding: const EdgeInsets.fromLTRB(16, 36, 16, 16),
       child: Row(
         children: [
