@@ -14,6 +14,7 @@ import 'package:tiny_weight/app/pages/ai_search_view.dart';
 import 'package:tiny_weight/app/pages/mall_view.dart';
 import 'package:tiny_weight/app/pages/setting_view.dart';
 import 'package:tiny_weight/app/pages/organization_view.dart';
+import 'package:tiny_weight/app/pages/activity_view.dart';
 
 class MainLogic extends BaseLogic {
   int currentIndex = 0;
@@ -22,12 +23,7 @@ class MainLogic extends BaseLogic {
 
   var homepageWidgets = <Widget>[
     MallView(),
-    const Center(
-      child: Text(
-        '活動頁面\n盡請期待',
-        style: TextStyle(fontSize: 20, color: Colors.black),
-      ),
-    ),
+    ActivityView(),
     AiSearchView(),
     OrganizationView(),
     SettingView()
