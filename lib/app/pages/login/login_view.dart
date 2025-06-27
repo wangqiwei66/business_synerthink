@@ -72,7 +72,7 @@ class _LoginViewPageState extends State<LoginViewPage> {
                       const Text(
                         '登入',
                         style: TextStyle(
-                          color: Colors.purple,
+                          color: Color(0xFFAF8AFF),
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -130,14 +130,15 @@ class _LoginViewPageState extends State<LoginViewPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
-                            onPressed: logic.onRegister,
-                            child: const Text('註冊成為普通會員',
-                                style: TextStyle(color: Colors.blueAccent)),
-                          ),
+                              onPressed: logic.onRegister,
+                              child: const Text(
+                                '註冊成為普通會員',
+                                style: TextStyle(color: Color(0xFF6DB1E1)),
+                              )),
                           TextButton(
                             onPressed: logic.onTerms,
                             child: const Text('使用者條款',
-                                style: TextStyle(color: Colors.blueAccent)),
+                                style: TextStyle(color: Color(0xFF6DB1E1))),
                           ),
                         ],
                       ),
@@ -149,7 +150,7 @@ class _LoginViewPageState extends State<LoginViewPage> {
                           child: ElevatedButton(
                             onPressed: logic.onLogin,
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue,
+                              backgroundColor: const Color(0xFF4285F4),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30),
                               ),
@@ -175,20 +176,20 @@ class _LoginViewPageState extends State<LoginViewPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton(
-                      icon: Image.asset('${base_img_path}icon_login_fb.png',
-                          width: 36, height: 36),
+                      icon: Image.asset('${base_img_path}facebook_icon.png',
+                          width: 30, height: 30),
                       onPressed: logic.onLoginFacebook,
                     ),
                     const SizedBox(width: 24),
                     IconButton(
-                      icon: Image.asset('${base_img_path}icon_login_google.png',
-                          width: 36, height: 36),
+                      icon: Image.asset('${base_img_path}google_icon.png',
+                          width: 30, height: 30),
                       onPressed: logic.onLoginGoogle,
                     ),
                     const SizedBox(width: 24),
                     IconButton(
-                      icon: Image.asset('${base_img_path}icon_login_apple.png',
-                          width: 36, height: 36),
+                      icon: Image.asset('${base_img_path}apple_icon.png',
+                          width: 30, height: 30),
                       onPressed: logic.onLoginApple,
                     ),
                   ],
@@ -203,7 +204,7 @@ class _LoginViewPageState extends State<LoginViewPage> {
                     TextButton(
                       onPressed: logic.onContactUs,
                       child: const Text('按此聯絡我們',
-                          style: TextStyle(color: Colors.lightBlueAccent)),
+                          style: TextStyle(color: Color(0xFF6DB1E1))),
                     ),
                   ],
                 ),
