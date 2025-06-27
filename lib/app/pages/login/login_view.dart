@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/common/widget_extention.dart';
+import 'package:tiny_weight/app/config/color.dart';
 import 'package:tiny_weight/app/config/path.dart';
 import 'login_logic.dart';
 
@@ -133,12 +134,12 @@ class _LoginViewPageState extends State<LoginViewPage> {
                               onPressed: logic.onRegister,
                               child: const Text(
                                 '註冊成為普通會員',
-                                style: TextStyle(color: Color(0xFF6DB1E1)),
+                                style: TextStyle(color: KColor.textblueColor),
                               )),
                           TextButton(
                             onPressed: logic.onTerms,
                             child: const Text('使用者條款',
-                                style: TextStyle(color: Color(0xFF6DB1E1))),
+                                style: TextStyle(color: KColor.textblueColor)),
                           ),
                         ],
                       ),
@@ -204,7 +205,7 @@ class _LoginViewPageState extends State<LoginViewPage> {
                     TextButton(
                       onPressed: logic.onContactUs,
                       child: const Text('按此聯絡我們',
-                          style: TextStyle(color: Color(0xFF6DB1E1))),
+                          style: TextStyle(color: KColor.textblueColor)),
                     ),
                   ],
                 ),
@@ -217,3 +218,5 @@ class _LoginViewPageState extends State<LoginViewPage> {
     );
   }
 }
+
+class Kcolor {}

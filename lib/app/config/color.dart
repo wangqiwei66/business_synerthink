@@ -20,6 +20,9 @@ class KColor {
   /// 0xff343434
   static const Color textblackColor = Color(0xff343434);
 
+  static const Color textblueColor = Color(0xFF6DB1E1);
+  static const Color textPurpleColor = Color(0xFF9747FF);
+
   ///0xff515151
   static const Color textLowBlackColor = Color(0xff515151);
 
@@ -36,7 +39,7 @@ class KColor {
   static const Color garyBorderColor = Color(0xFFDDDDDD);
 
   ///透明度50
-  static const Color buttomBgGreenColor = Color(0xFF42C569);
+  static const Color buttomBgBlueColor = Color(0xFF4285F4);
   static const Color defaultTextColor = Color(0x80FFFFFF);
   static const Color itemBgColor = Color(0xFF1A1C30);
 

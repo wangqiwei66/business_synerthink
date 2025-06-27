@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/common/widget_extention.dart';
+import 'package:tiny_weight/app/config/color.dart';
 import 'package:tiny_weight/app/config/path.dart';
 import 'package:tiny_weight/app/widgets/toast.dart';
 import 'register_logic.dart';
@@ -68,7 +69,7 @@ class RegisterView extends StatelessWidget {
                     color: const Color(0xFF292929),
                     borderRadius: BorderRadius.circular(24),
                     border:
-                        Border.all(color: const Color(0xFF7C4DFF), width: 1),
+                        Border.all(color: KColor.textPurpleColor, width: 0.2),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,9 +77,9 @@ class RegisterView extends StatelessWidget {
                       const Text(
                         '註冊',
                         style: TextStyle(
-                          color: Color(0xFFB388FF),
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
+                          color: KColor.textPurpleColor,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -102,7 +103,7 @@ class RegisterView extends StatelessWidget {
                             height: 30,
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF7C4DFF),
+                                backgroundColor: KColor.textPurpleColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6),
                                 ),
@@ -139,7 +140,7 @@ class RegisterView extends StatelessWidget {
                             child: const Text(
                               '使用者條款',
                               style: TextStyle(
-                                color: Color(0xFF2196F3),
+                                color: KColor.buttomBgBlueColor,
                                 decoration: TextDecoration.underline,
                               ),
                             ),
@@ -153,7 +154,7 @@ class RegisterView extends StatelessWidget {
                           width: 120,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2196F3),
+                              backgroundColor: KColor.buttomBgBlueColor,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(24),
                               ),
@@ -179,7 +180,7 @@ class RegisterView extends StatelessWidget {
                       child: const Text(
                         ' 按此聯絡我們',
                         style: TextStyle(
-                          color: Color(0xFF2196F3),
+                          color: KColor.buttomBgBlueColor,
                           decoration: TextDecoration.underline,
                         ),
                       ),
