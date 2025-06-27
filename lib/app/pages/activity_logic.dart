@@ -1,20 +1,95 @@
 import 'package:get/get.dart';
 
 class ActivityLogic extends GetxController {
-  // 示例活动数据
-  final activities = [
+  // 跨分會活動
+  final crossChapterActivities = [
     {
       'type': '跨分會活動',
-      'title': '【組織】活動標題欄，限制文字30字元以內，超出字數系統自動隱藏多出的文字',
-      'org': '舉辦組織名稱',
-      'category': '活動類型',
+      'title': '國際舞蹈嘉年華，邀請多國舞者同台競技，精彩不容錯過',
+      'org': '國際舞蹈協會',
+      'category': '文藝表演',
       'canSign': true,
       'date': '2025/3/1',
       'location': '銅鑼灣',
-      'fee': '\$1,000',
-      'people': '30',
+      'fee': '\$2,000',
+      'people': '100',
       'host': 'ABCD CHAPTER',
-      'img': 'assets/img/mail1.jpg',
+      'img': 'assets/img/banner1.jpg',
+      'orgLink': 'https://dance.org',
     },
-  ].obs;
+    {
+      'type': '跨分會活動',
+      'title': '跨界創新論壇，30字內自動隱藏多餘文字',
+      'org': '創新協會',
+      'category': '論壇',
+      'canSign': false,
+      'date': '2025/4/10',
+      'location': '中環',
+      'fee': '免費',
+      'people': '200',
+      'host': 'INNO CHAPTER',
+      'img': 'assets/img/banner2.jpg',
+      'orgLink': 'https://inno.org',
+    },
+    {
+      'type': '跨分會活動',
+      'title': '國際美食節',
+      'org': '美食協會',
+      'category': '美食',
+      'canSign': true,
+      'date': '2025/5/5',
+      'location': '尖沙咀',
+      'fee': '\$1,500',
+      'people': '80',
+      'host': 'FOOD CHAPTER',
+      'img': 'assets/img/banner3.jpg',
+      'orgLink': 'https://food.org',
+    },
+  ];
+
+  // 分會活動
+  final chapterActivities = [
+    {
+      'type': '分會活動',
+      'title': '會員交流茶會',
+      'org': '分會辦公室',
+      'category': '交流',
+      'canSign': true,
+      'date': '2025/3/15',
+      'location': '旺角',
+      'fee': '免費',
+      'people': '30',
+      'host': 'MONGKOK CHAPTER',
+      'img': 'assets/img/ajjl_normal.png',
+      'orgLink': 'https://chapter.org',
+    },
+    {
+      'type': '分會活動',
+      'title': '健康講座',
+      'org': '健康協會',
+      'category': '講座',
+      'canSign': false,
+      'date': '2025/4/2',
+      'location': '沙田',
+      'fee': '免費',
+      'people': '50',
+      'host': 'HEALTH CHAPTER',
+      'img': 'assets/img/amount_icon.png',
+      'orgLink': 'https://health.org',
+    },
+    {
+      'type': '分會活動',
+      'title': '春季戶外踏青',
+      'org': '戶外俱樂部',
+      'category': '戶外',
+      'canSign': true,
+      'date': '2025/5/20',
+      'location': '大埔',
+      'fee': '\$100',
+      'people': '40',
+      'host': 'OUTDOOR CHAPTER',
+      'img': 'assets/img/activity_BG.png',
+      'orgLink': 'https://outdoor.org',
+    },
+  ];
 }

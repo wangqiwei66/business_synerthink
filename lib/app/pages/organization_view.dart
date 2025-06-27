@@ -55,6 +55,7 @@ class OrganizationView extends StatelessWidget {
                     desc:
                         '用戶亦可進入組織搜索版面，設定篩選條件，搜尋你想加入的組織。加入組織後所有分會會員自動歸為該分會所隸屬的組織之成員。詳情可聯絡我們線上客服。',
                   ),
+                  const SizedBox(height: 60),
                 ],
               ),
             ),

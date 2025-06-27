@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiny_weight/app/config/color.dart';
 import 'package:tiny_weight/app/pages/userinfo_view.dart';
+import 'package:tiny_weight/app/widgets/divider.dart';
 import 'activity_logic.dart';
 
 class ActivityView extends StatelessWidget {
@@ -23,8 +25,13 @@ class ActivityView extends StatelessWidget {
                   _buildCalendar(),
                   _buildTips(),
                   _buildSection('跨分會活動'),
-                  _buildActivityCard(),
+                  ...logic.crossChapterActivities
+                      .map((e) => _buildActivityCardItem(e))
+                      .toList(),
                   _buildSection('分會活動'),
+                  ...logic.chapterActivities
+                      .map((e) => _buildActivityCardItem(e))
+                      .toList(),
                   const SizedBox(height: 80),
                 ],
               ),
@@ -42,24 +49,30 @@ class ActivityView extends StatelessWidget {
         children: [
           const Text('活動列表',
               style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   color: Color(0xFF8B8B8B),
                   fontWeight: FontWeight.bold)),
           const SizedBox(width: 16),
-          _buildLegend(),
+          Expanded(child: _buildLegend()),
         ],
       ),
     );
   }
 
   Widget _buildLegend() {
-    return Row(
-      children: [
-        _legendDot(Colors.pink, '跨分會活動'),
-        _legendDot(Colors.amber, '分會活動'),
-        _legendDot(Colors.cyan, 'AI推薦'),
-        _legendDot(Colors.grey, '已報名'),
-      ],
+    return SizedBox(
+      height: 28,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            _legendDot(Colors.pink, '跨分會活動'),
+            _legendDot(Colors.amber, '分會活動'),
+            _legendDot(Colors.cyan, 'AI推薦'),
+            _legendDot(Colors.grey, '已報名'),
+          ],
+        ),
+      ),
     );
   }
 
@@ -67,15 +80,15 @@ class ActivityView extends StatelessWidget {
     return Row(
       children: [
         Container(
-          width: 14,
-          height: 14,
+          width: 11,
+          height: 11,
           margin: const EdgeInsets.only(right: 4, left: 8),
           decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(4),
+            // borderRadius: BorderRadius.circular(4),
           ),
         ),
-        Text(label, style: const TextStyle(fontSize: 13)),
+        Text(label, style: const TextStyle(fontSize: 12)),
       ],
     );
   }
@@ -174,15 +187,20 @@ class ActivityView extends StatelessWidget {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            '點選日期，下方自動顯示該日期活動詳情',
-            style: TextStyle(color: Color(0xFFB36AFF), fontSize: 15),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '點選日期，下方自動顯示該日期活動詳情',
+                style: TextStyle(color: Color(0xFFB36AFF), fontSize: 12),
+              ),
+            ],
           ),
           Text(
             '未加入分會人士，系統自動顯示所有公開活動。',
-            style: TextStyle(color: Colors.pink, fontSize: 15),
+            style: TextStyle(color: Colors.pink, fontSize: 12),
           ),
         ],
       ),
@@ -192,167 +210,192 @@ class ActivityView extends StatelessWidget {
   Widget _buildSection(String title) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 18, 0, 8),
-      child: Text(title,
-          style: const TextStyle(
-              fontSize: 18,
-              color: Colors.black87,
-              fontWeight: FontWeight.bold)),
+      child: Row(
+        children: [
+          Text(title,
+              style: const TextStyle(
+                  fontSize: 14,
+                  color: Color(0xFF888B94),
+                  fontWeight: FontWeight.bold)),
+          CzDivider(
+            width: Get.width - 120, // 减去左右边距和标题宽度
+          )
+        ],
+      ),
     );
   }
 
-  Widget _buildActivityCard() {
-    // 示例卡片
+  // 单个活动卡片，传入 map 数据
+  Widget _buildActivityCardItem(Map<String, dynamic> data) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withOpacity(0.2),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
         ],
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Column(
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.asset(
-              'assets/img/meal1.jpg',
-              width: 100,
-              height: 80,
-              fit: BoxFit.cover,
-            ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  data['img'] ?? '',
+                  width: 90,
+                  height: 90,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 主标题
+                        Expanded(
+                          child: Text(
+                            data['title'] ?? '',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        // 组织名
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            data['org'] ?? '',
+                            style: const TextStyle(
+                              color: Color(0xFF363140),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          data['category'] ?? '',
+                          style: const TextStyle(
+                            color: Color(0xFFFFA800),
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const SizedBox(width: 4),
+                        if (data['canSign'] == true)
+                          const Text(
+                            '可報名',
+                            style: TextStyle(
+                              color: Color(0xFFE6004E),
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                    Wrap(
+                      spacing: 12,
+                      runSpacing: 2,
+                      children: [
+                        Text('活動時間: ${data['date'] ?? ''}',
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.black54)),
+                        Text('地點: ${data['location'] ?? ''}',
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.black54)),
+                        Text('費用: ${data['fee'] ?? ''}',
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.black54)),
+                        Text('人數: ${data['people'] ?? ''}',
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.black54)),
+                        Text('主辦分會: ${data['host'] ?? ''}',
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.black54)),
+                      ],
+                    ),
+                    const SizedBox(height: 6),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Text(
-                        '【組織】活動標題欄，限制文字30字元以內，超出字數系統自動隱藏多出的文字',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 15),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 4),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFB36AFF),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Text('舉辦組織名稱',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                    const SizedBox(width: 4),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Text('活動類型',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                    const SizedBox(width: 4),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 2),
-                      decoration: BoxDecoration(
-                        color: Colors.pink,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: const Text('可報名',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ],
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // 主办机构蓝色链接
+              Expanded(
+                child: Text(
+                  '主辦機構: ${data['org'] ?? ''}',
+                  style: const TextStyle(
+                    color: Color(0xFF1A73E8),
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
-                const SizedBox(height: 6),
-                const Row(
-                  children: [
-                    Text('活動時間: 2025/3/1',
-                        style: TextStyle(fontSize: 13, color: Colors.black54)),
-                    SizedBox(width: 8),
-                    Text('地點: 銅鑼灣',
-                        style: TextStyle(fontSize: 13, color: Colors.black54)),
-                    SizedBox(width: 8),
-                    Text('費用: \$1,000',
-                        style: TextStyle(fontSize: 13, color: Colors.black54)),
-                  ],
+              ),
+              const SizedBox(width: 8),
+              // 更多详情按钮
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFFB36AFF),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 18, vertical: 0),
+                  minimumSize: const Size(0, 18),
+                  elevation: 0,
                 ),
-                const SizedBox(height: 2),
-                const Row(
-                  children: [
-                    Text('人數: 30',
-                        style: TextStyle(fontSize: 13, color: Colors.black54)),
-                    SizedBox(width: 8),
-                    Text('主辦分會: ABCD CHAPTER',
-                        style: TextStyle(fontSize: 13, color: Colors.black54)),
-                  ],
+                onPressed: () {},
+                child: const Text('更多詳情',
+                    style: TextStyle(fontSize: 13, color: Colors.white)),
+              ),
+              const SizedBox(width: 8),
+              // 直接报名按钮
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.pink,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(9),
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 18, vertical: 0),
+                  minimumSize: const Size(0, 18),
+                  elevation: 0,
                 ),
-                const SizedBox(height: 6),
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Text('主辦機構: ABCD DRESSING CO.LTD',
-                          style: TextStyle(
-                              color: Color(0xFF1A73E8),
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFB36AFF),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 0),
-                        minimumSize: const Size(0, 32),
-                      ),
-                      onPressed: () {},
-                      child: const Text('更多詳情',
-                          style: TextStyle(fontSize: 13, color: Colors.white)),
-                    ),
-                    const SizedBox(width: 8),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.pink,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16)),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 0),
-                        minimumSize: const Size(0, 32),
-                      ),
-                      onPressed: () {},
-                      child: const Text('直接報名',
-                          style: TextStyle(fontSize: 13, color: Colors.white)),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+                onPressed: () {},
+                child: const Text('直接報名',
+                    style: TextStyle(fontSize: 13, color: Colors.white)),
+              ),
+            ],
+          )
         ],
       ),
     );
