@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiny_weight/app/config/path.dart';
 import 'package:tiny_weight/app/widgets/scalable.dart';
 import 'package:tiny_weight/app/pages/side_menu_view.dart';
 import 'package:tiny_weight/app/pages/userinfo_view.dart';
@@ -281,7 +282,11 @@ class MallView extends StatelessWidget {
         children: logic.quickActions
             .map((action) => Column(
                   children: [
-                    Icon(action['icon'], color: Colors.black87, size: 36),
+                    Image.asset(
+                      '$base_img_path${action['icon']}',
+                      width: 36,
+                      height: 36,
+                    ),
                     const SizedBox(height: 4),
                     Text(action['label'], style: const TextStyle(fontSize: 14)),
                   ],

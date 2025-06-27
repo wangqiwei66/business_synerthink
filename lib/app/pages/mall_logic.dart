@@ -18,11 +18,11 @@ class MallLogic extends GetxController {
   ];
 
   final List<Map<String, dynamic>> quickActions = [
-    {'icon': Icons.card_giftcard, 'label': '人氣商品'},
-    {'icon': Icons.track_changes, 'label': '最新任務'},
-    {'icon': Icons.local_fire_department, 'label': '熱門搜索'},
-    {'icon': Icons.campaign, 'label': '必到活動'},
-    {'icon': Icons.handshake, 'label': '合作方案'},
+    {'icon': 'gift_icon.png', 'label': '人氣商品'},
+    {'icon': 'task_icon.png', 'label': '最新任務'},
+    {'icon': 'hot_icon.png', 'label': '熱門搜索'},
+    {'icon': 'notiofy_icon.png', 'label': '必到活動'},
+    {'icon': 'cooperate_icon.png', 'label': '合作方案'},
   ];
 
   final List<String> adImages = [
