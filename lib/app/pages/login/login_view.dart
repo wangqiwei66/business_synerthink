@@ -25,7 +25,7 @@ class _LoginViewPageState extends State<LoginViewPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 80),
+                const SizedBox(height: 40),
                 // Logo
                 Image.asset(
                   '${base_img_path}app_icon.png',
@@ -34,22 +34,11 @@ class _LoginViewPageState extends State<LoginViewPage> {
                 ),
                 const SizedBox(height: 24),
                 // 標題
-                const Text(
-                  '商聯思維',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 4,
-                    shadows: [
-                      Shadow(
-                        color: Colors.black54,
-                        offset: Offset(2, 2),
-                        blurRadius: 4,
-                      ),
-                    ],
-                  ),
-                ).animationSlideYFadein(),
+                Image.asset(
+                  '${base_img_path}app_name.png',
+                  width: 120,
+                  height: 60,
+                ),
                 const SizedBox(height: 8),
                 // 副標題
                 const Text(

@@ -24,8 +24,18 @@ class AiSearchView extends StatelessWidget {
 
   Widget _buildHeader() {
     return Container(
-      color: Colors.white,
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Color(0x33000000), // 深色阴影
+            blurRadius: 12,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
       padding: const EdgeInsets.only(top: 36, left: 0, right: 0, bottom: 8),
+      margin: const EdgeInsets.only(bottom: 4),
       child: Row(
         children: [
           const SizedBox(width: 16),

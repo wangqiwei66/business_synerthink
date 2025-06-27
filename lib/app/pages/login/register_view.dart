@@ -34,21 +34,11 @@ class RegisterView extends StatelessWidget {
                   ),
                 ),
                 // 标题
-                Text(
-                  '商聯思維',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      Shadow(
-                        color: Colors.black.withOpacity(0.5),
-                        offset: const Offset(2, 2),
-                        blurRadius: 4,
-                      ),
-                    ],
-                  ),
-                ).animationSlideYFadein(),
+                Image.asset(
+                  '${base_img_path}app_name.png',
+                  width: 120,
+                  height: 60,
+                ),
                 const SizedBox(height: 8),
                 // 副标题
                 const Text(

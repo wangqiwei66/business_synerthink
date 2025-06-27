@@ -303,22 +303,17 @@ class MallView extends StatelessWidget {
         children: [
           Container(
             height: 60,
-            width: 60,
+            width: 80,
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
             decoration: const BoxDecoration(
               // color: Colors.pink[100],
               image: DecorationImage(
-                image: AssetImage('$base_img_path/rightPink.png'),
+                image: AssetImage('${base_img_path}rightPink.png'),
                 fit: BoxFit.fill,
               ),
             ),
-            child: const Stack(children: [
-              Center(
-                child: Text('組織\n推薦',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black)),
-              ),
-            ]),
+            child: Image.asset('${base_img_path}organize_recommend.png',
+                width: 35, height: 35),
           ),
           const SizedBox(width: 8),
           Expanded(
@@ -336,7 +331,7 @@ class MallView extends StatelessWidget {
                           width: 100, height: 60, fit: BoxFit.cover),
                       Positioned(
                         right: 6,
-                        bottom: 4,
+                        top: 4,
                         child: Container(
                           color: Colors.black54,
                           padding: const EdgeInsets.symmetric(
