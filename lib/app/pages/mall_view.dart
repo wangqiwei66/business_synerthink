@@ -305,15 +305,20 @@ class MallView extends StatelessWidget {
             height: 60,
             width: 60,
             padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-            decoration: BoxDecoration(
-              color: Colors.pink[100],
-              borderRadius: BorderRadius.circular(8),
+            decoration: const BoxDecoration(
+              // color: Colors.pink[100],
+              image: DecorationImage(
+                image: AssetImage('$base_img_path/rightPink.png'),
+                fit: BoxFit.fill,
+              ),
             ),
-            child: const Center(
-              child: Text('組織\n推薦',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black)),
-            ),
+            child: const Stack(children: [
+              Center(
+                child: Text('組織\n推薦',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.black)),
+              ),
+            ]),
           ),
           const SizedBox(width: 8),
           Expanded(
