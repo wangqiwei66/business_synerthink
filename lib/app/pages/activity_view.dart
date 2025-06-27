@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:table_calendar/table_calendar.dart';
 import 'package:tiny_weight/app/config/color.dart';
 import 'package:tiny_weight/app/pages/userinfo_view.dart';
 import 'package:tiny_weight/app/widgets/divider.dart';
@@ -8,6 +9,9 @@ import 'activity_logic.dart';
 class ActivityView extends StatelessWidget {
   ActivityView({super.key});
   final logic = Get.put(ActivityLogic());
+
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +98,6 @@ class ActivityView extends StatelessWidget {
   }
 
   Widget _buildCalendar() {
-    // 这里只做静态UI示例，实际可用第三方日历控件
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Container(
@@ -102,84 +105,36 @@ class ActivityView extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(18),
         ),
-        child: Column(
-          children: [
-            const SizedBox(height: 8),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-              decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: const Text('March', style: TextStyle(color: Colors.white)),
+        child: TableCalendar(
+          firstDay: DateTime.utc(2020, 1, 1),
+          lastDay: DateTime.utc(2030, 12, 31),
+          focusedDay: _focusedDay,
+          selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+          calendarFormat: CalendarFormat.month,
+          headerStyle: const HeaderStyle(
+            formatButtonVisible: false,
+            titleCentered: true,
+            leftChevronIcon: Icon(Icons.chevron_left, color: Colors.black),
+            rightChevronIcon: Icon(Icons.chevron_right, color: Colors.black),
+          ),
+          calendarStyle: const CalendarStyle(
+            todayDecoration: BoxDecoration(
+              color: Color(0xFFB36AFF),
+              shape: BoxShape.circle,
             ),
-            const SizedBox(height: 8),
-            // 静态日历行
-            _buildCalendarRow(['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-                isHeader: true),
-            _buildCalendarRow(['', '', '', '', '', '1', '2'], dots: [6]),
-            _buildCalendarRow(['3', '4', '5', '6', '7', '8', '9'], dots: [5]),
-            _buildCalendarRow(['10', '11', '12', '13', '14', '15', '16'],
-                dots: [2]),
-            _buildCalendarRow(['17', '18', '19', '20', '21', '22', '23'],
-                dots: [6]),
-            _buildCalendarRow(['24', '25', '26', '27', '28', '29', '30']),
-            _buildCalendarRow(['31', '', '', '', '', '', '']),
-            const SizedBox(height: 8),
-          ],
+            selectedDecoration: BoxDecoration(
+              color: Colors.pink,
+              shape: BoxShape.circle,
+            ),
+            weekendTextStyle: TextStyle(color: Colors.redAccent),
+          ),
+          onDaySelected: (selectedDay, focusedDay) {
+            _selectedDay = selectedDay;
+            _focusedDay = focusedDay;
+            // 这里可加 setState 或逻辑联动
+          },
         ),
       ),
-    );
-  }
-
-  Widget _buildCalendarRow(List<String> days,
-      {bool isHeader = false, List<int>? dots}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: List.generate(days.length, (i) {
-        final isDot = dots != null && dots.contains(i);
-        return Container(
-          margin: const EdgeInsets.symmetric(vertical: 2),
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            color: isHeader
-                ? Colors.transparent
-                : (i == 0 && !isHeader)
-                    ? const Color(0xFF363140)
-                    : Colors.transparent,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Center(
-            child: isHeader
-                ? Text(days[i], style: const TextStyle(color: Colors.grey))
-                : Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Text(days[i],
-                          style: TextStyle(
-                              color: i == 0 && !isHeader
-                                  ? Colors.white
-                                  : Colors.black,
-                              fontWeight: FontWeight.bold)),
-                      if (isDot)
-                        Positioned(
-                          bottom: 4,
-                          right: 8,
-                          child: Container(
-                            width: 8,
-                            height: 8,
-                            decoration: BoxDecoration(
-                              color: Colors.pink,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-          ),
-        );
-      }),
     );
   }
 
