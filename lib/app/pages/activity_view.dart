@@ -6,10 +6,14 @@ import 'package:tiny_weight/app/pages/userinfo_view.dart';
 import 'package:tiny_weight/app/widgets/divider.dart';
 import 'activity_logic.dart';
 
-class ActivityView extends StatelessWidget {
-  ActivityView({super.key});
-  final logic = Get.put(ActivityLogic());
+class ActivityView extends StatefulWidget {
+  const ActivityView({super.key});
+  @override
+  State<ActivityView> createState() => _ActivityViewState();
+}
 
+class _ActivityViewState extends State<ActivityView> {
+  final logic = Get.put(ActivityLogic());
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
 
@@ -111,27 +115,89 @@ class ActivityView extends StatelessWidget {
           focusedDay: _focusedDay,
           selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
           calendarFormat: CalendarFormat.month,
+          startingDayOfWeek: StartingDayOfWeek.monday,
           headerStyle: const HeaderStyle(
             formatButtonVisible: false,
             titleCentered: true,
             leftChevronIcon: Icon(Icons.chevron_left, color: Colors.black),
             rightChevronIcon: Icon(Icons.chevron_right, color: Colors.black),
           ),
-          calendarStyle: const CalendarStyle(
+          calendarBuilders: CalendarBuilders(
+            defaultBuilder: (context, day, focusedDay) {
+              final isSaturday = day.weekday == DateTime.saturday;
+              final isSunday = day.weekday == DateTime.sunday;
+              if (isSaturday || isSunday) {
+                return Center(
+                  child: Text(
+                    '${day.day}',
+                    style: const TextStyle(
+                      color: Color(0xFF2196F3),
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                );
+              }
+              return null;
+            },
+            todayBuilder: (context, day, focusedDay) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF2196F3),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Text(
+                    '${day.day}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              );
+            },
+            selectedBuilder: (context, day, focusedDay) {
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.pink, width: 1),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Text(
+                    '${day.day}',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+          calendarStyle: CalendarStyle(
             todayDecoration: BoxDecoration(
-              color: Color(0xFFB36AFF),
-              shape: BoxShape.circle,
+              color: Colors.transparent,
+              border: Border.all(color: const Color(0xFF2196F3), width: 2),
+              borderRadius: BorderRadius.circular(8),
             ),
+            todayTextStyle: const TextStyle(
+                color: Color(0xFF2196F3), fontWeight: FontWeight.bold),
             selectedDecoration: BoxDecoration(
               color: Colors.pink,
-              shape: BoxShape.circle,
+              borderRadius: BorderRadius.circular(8),
             ),
-            weekendTextStyle: TextStyle(color: Colors.redAccent),
+            selectedTextStyle: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold),
+            weekendTextStyle: const TextStyle(color: Color(0xFF2196F3)),
           ),
           onDaySelected: (selectedDay, focusedDay) {
-            _selectedDay = selectedDay;
-            _focusedDay = focusedDay;
-            // 这里可加 setState 或逻辑联动
+            setState(() {
+              _selectedDay = selectedDay;
+              _focusedDay = focusedDay;
+            });
+            // 打印选中日期
+            print('选中日期: $selectedDay');
           },
         ),
       ),
