@@ -14,7 +14,7 @@ import 'package:tiny_weight/app/pages/ai_search_view.dart';
 import 'package:tiny_weight/app/pages/mall_view.dart';
 import 'package:tiny_weight/app/pages/setting_view.dart';
 
-class MainLogic extends BaseLogic {
+class BuyerMainLogic extends BaseLogic {
   int currentIndex = 0;
   bool isTest = false;
   bool isReload = false;
@@ -23,14 +23,14 @@ class MainLogic extends BaseLogic {
     MallView(),
     const Center(
       child: Text(
-        '活動頁面',
+        '活動頁面\n盡請期待',
         style: TextStyle(fontSize: 20, color: Colors.black),
       ),
     ),
     AiSearchView(),
     const Center(
       child: Text(
-        '組織頁面',
+        '組織頁面\n盡請期待',
         style: TextStyle(fontSize: 20, color: Colors.black),
       ),
     ),
@@ -51,7 +51,7 @@ class MainLogic extends BaseLogic {
         height: 25,
         width: 25,
       ),
-      label: '商城'.tr,
+      label: '商品'.tr,
     ),
     BottomNavigationBarItem(
       // icon: const Icon(Icons.access_time),
@@ -67,7 +67,7 @@ class MainLogic extends BaseLogic {
         height: 25,
         width: 25,
       ),
-      label: '活動'.tr,
+      label: '分類'.tr,
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
@@ -82,7 +82,7 @@ class MainLogic extends BaseLogic {
         height: 25,
         width: 25,
       ),
-      label: '', //'扫一扫'.tr,
+      label: '商品搜索'.tr, //'扫一扫'.tr,
     ),
     BottomNavigationBarItem(
       // icon: const Icon(Icons.access_time),
@@ -98,7 +98,7 @@ class MainLogic extends BaseLogic {
         height: 25,
         width: 25,
       ),
-      label: '組織'.tr,
+      label: '購物車'.tr,
     ),
     BottomNavigationBarItem(
       // icon: const Icon(Icons.access_time),
@@ -115,7 +115,7 @@ class MainLogic extends BaseLogic {
         // width: 30,
       ),
 
-      label: '設置'.tr,
+      label: '我的'.tr,
     ),
   ];
 

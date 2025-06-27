@@ -328,7 +328,7 @@ class MallView extends StatelessWidget {
                   child: Stack(
                     children: [
                       Image.asset(logic.regionImages[i],
-                          width: 100, height: 60, fit: BoxFit.cover),
+                          width: 105, height: 60, fit: BoxFit.cover),
                       Positioned(
                         right: 6,
                         top: 4,

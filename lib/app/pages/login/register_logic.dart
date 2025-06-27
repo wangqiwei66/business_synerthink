@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:tiny_weight/app/pages/main_view.dart';
+import 'package:tiny_weight/app/pages/seller_main_view.dart';
 import 'package:tiny_weight/app/widgets/toast.dart';
 
 class RegisterLogic extends GetxController {
@@ -34,7 +34,7 @@ class RegisterLogic extends GetxController {
     Future.delayed(const Duration(seconds: 2), () {
       hideLoading();
       EasyLoading.showSuccess('註冊成功');
-      Get.to(() => const MainPage(), transition: Transition.fadeIn);
+      Get.to(() => const SellerMainPage(), transition: Transition.fadeIn);
     });
   }
 

@@ -15,7 +15,7 @@ import 'package:tiny_weight/app/config/const.dart';
 import 'package:tiny_weight/app/controllers/scan_controller.dart';
 import 'package:tiny_weight/app/controllers/user_controller.dart';
 import 'package:tiny_weight/app/pages/login/login_view.dart';
-import 'package:tiny_weight/app/pages/main_view.dart';
+import 'package:tiny_weight/app/pages/seller_main_view.dart';
 import 'package:tiny_weight/app/service/api_service.dart';
 import 'package:tiny_weight/app/models/user_info/user_info.dart';
 import 'package:tiny_weight/generated/locales.g.dart';
@@ -201,7 +201,7 @@ class MyApp extends StatelessWidget {
             fallbackLocale: const Locale('zh', 'CN'),
             title: '商聯思維'.tr,
             routes: {
-              '/main': (context) => const MainPage(),
+              '/main': (context) => const SellerMainPage(),
               '/login': (context) => const LoginViewPage()
             },
             builder: EasyLoading.init(),
@@ -224,7 +224,7 @@ class MyApp extends StatelessWidget {
                     ? isFirstOpen
                         ? const LoginViewPage()
                         : const LoginViewPage()
-                    : const MainPage();
+                    : const SellerMainPage();
                 // MainPage();
               },
             ),
