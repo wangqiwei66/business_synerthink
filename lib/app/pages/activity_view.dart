@@ -264,9 +264,15 @@ class _ActivityViewState extends State<ActivityView> {
       ),
       child: Column(
         children: [
+          const SizedBox(
+            height: 8,
+          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(
+                width: 8,
+              ),
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: Image.asset(
@@ -276,7 +282,7 @@ class _ActivityViewState extends State<ActivityView> {
                   fit: BoxFit.cover,
                 ),
               ),
-              const SizedBox(width: 10),
+              const SizedBox(width: 8),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
