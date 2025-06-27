@@ -97,24 +97,32 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
             model.changeIndex(index);
           },
         ),
-        floatingActionButton: ScalableWell(
-            onTap: () async {
-              model.changeIndex(2);
-            },
-            child: Container(
-              height: 78,
-              width: 78,
-              decoration: const BoxDecoration(
-                color: Color(0xFF363140),
-                shape: BoxShape.circle,
-              ),
-              child: Image.asset(
-                model.currentIndex == 2
-                    ? '${base_img_path}ai_icon_pressed.png'
-                    : '${base_img_path}ai_icon.png',
-                fit: BoxFit.fill,
-              ),
-            )),
+        floatingActionButton: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ScalableWell(
+                onTap: () async {
+                  model.changeIndex(2);
+                },
+                child: Container(
+                  height: 78,
+                  width: 78,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF363140),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    model.currentIndex == 2
+                        ? '${base_img_path}ai_icon_pressed.png'
+                        : '${base_img_path}ai_icon.png',
+                    fit: BoxFit.fill,
+                  ),
+                )),
+            const SizedBox(
+              height: 10,
+            )
+          ],
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: IndexedStack(
           index: model.currentIndex,

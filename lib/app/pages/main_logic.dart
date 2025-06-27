@@ -82,7 +82,7 @@ class MainLogic extends BaseLogic {
         height: 25,
         width: 25,
       ),
-      label: '', //'扫一扫'.tr,
+      label: 'AI搜索', //'扫一扫'.tr,
     ),
     BottomNavigationBarItem(
       // icon: const Icon(Icons.access_time),
