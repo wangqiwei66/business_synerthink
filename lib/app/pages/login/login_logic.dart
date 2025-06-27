@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
-import 'package:tiny_weight/app/pages/buyer_main_view.dart';
-import 'package:tiny_weight/app/pages/seller_main_view.dart';
+import 'package:tiny_weight/app/pages/main_view.dart';
 import 'package:tiny_weight/app/widgets/toast.dart';
 import 'package:tiny_weight/app/pages/login/register_view.dart';
 
@@ -20,7 +19,7 @@ class LoginLogic extends GetxController {
     showLoading(text: '正在登入...');
     Future.delayed(const Duration(seconds: 2), () {
       hideLoading();
-      Get.to(() => const BuyerMainPage(), transition: Transition.fadeIn);
+      Get.to(() => const MainPage(), transition: Transition.fadeIn);
     });
   }
 

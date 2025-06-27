@@ -5,26 +5,26 @@ import 'package:get/get.dart';
 import 'package:tiny_weight/app/config/color.dart';
 import 'package:tiny_weight/app/config/font.dart';
 import 'package:tiny_weight/app/config/path.dart';
-import 'package:tiny_weight/app/pages/seller_main_logic.dart';
+import 'package:tiny_weight/app/pages/sub_main_logic.dart';
+import 'package:tiny_weight/app/pages/main_logic.dart';
 import 'package:tiny_weight/app/widgets/button.dart';
 import 'package:tiny_weight/app/widgets/scalable.dart';
 import 'package:tiny_weight/app/widgets/uploadpage.dart';
 
-class SellerMainPage extends StatefulWidget {
-  const SellerMainPage({super.key});
+class SubMainPage extends StatefulWidget {
+  const SubMainPage({super.key});
 
   @override
-  State<SellerMainPage> createState() => _SellerMainPageState();
+  State<SubMainPage> createState() => _SubMainPageState();
 }
 
-class _SellerMainPageState extends State<SellerMainPage>
-    with WidgetsBindingObserver {
-  late final SellerMainLogic logic;
+class _SubMainPageState extends State<SubMainPage> with WidgetsBindingObserver {
+  late final SubMainLogic logic;
 
   @override
   void initState() {
     super.initState();
-    logic = Get.put(SellerMainLogic());
+    logic = Get.put(SubMainLogic());
   }
 
   @override
@@ -59,7 +59,7 @@ class _SellerMainPageState extends State<SellerMainPage>
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SellerMainLogic>(builder: (model) {
+    return GetBuilder<SubMainLogic>(builder: (model) {
       return UpdaterPage(Scaffold(
         appBar: kIsWeb
             ? AppBar(
@@ -98,24 +98,32 @@ class _SellerMainPageState extends State<SellerMainPage>
             model.changeIndex(index);
           },
         ),
-        floatingActionButton: ScalableWell(
-            onTap: () async {
-              model.changeIndex(2);
-            },
-            child: Container(
-              height: 78,
-              width: 78,
-              decoration: const BoxDecoration(
-                color: Color(0xFF363140),
-                shape: BoxShape.circle,
-              ),
-              child: Image.asset(
-                model.currentIndex == 2
-                    ? '${base_img_path}ai_icon_pressed.png'
-                    : '${base_img_path}ai_icon.png',
-                fit: BoxFit.fill,
-              ),
-            )),
+        floatingActionButton: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ScalableWell(
+                onTap: () async {
+                  model.changeIndex(2);
+                },
+                child: Container(
+                  height: 78,
+                  width: 78,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFF363140),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    model.currentIndex == 2
+                        ? '${base_img_path}ai_icon_pressed.png'
+                        : '${base_img_path}ai_icon.png',
+                    fit: BoxFit.fill,
+                  ),
+                )),
+            const SizedBox(
+              height: 6,
+            )
+          ],
+        ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: IndexedStack(
           index: model.currentIndex,

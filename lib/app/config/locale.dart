@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:get/get.dart';
-import 'package:tiny_weight/app/pages/seller_main_view.dart';
+import 'package:tiny_weight/app/pages/main_view.dart';
 
 enum LocaleKey {
   cn,
@@ -27,7 +27,7 @@ class KLocale {
     }
     if (reLoad == true) {
       Get.reloadAll(force: true);
-      Get.offAll(() => const SellerMainPage(), transition: Transition.fadeIn);
+      Get.offAll(() => const MainPage(), transition: Transition.fadeIn);
     }
   }
 }

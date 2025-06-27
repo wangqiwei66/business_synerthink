@@ -14,7 +14,7 @@ import 'package:tiny_weight/app/pages/ai_search_view.dart';
 import 'package:tiny_weight/app/pages/mall_view.dart';
 import 'package:tiny_weight/app/pages/setting_view.dart';
 
-class BuyerMainLogic extends BaseLogic {
+class SubMainLogic extends BaseLogic {
   int currentIndex = 0;
   bool isTest = false;
   bool isReload = false;

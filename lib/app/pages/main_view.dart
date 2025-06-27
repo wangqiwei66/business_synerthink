@@ -5,26 +5,25 @@ import 'package:get/get.dart';
 import 'package:tiny_weight/app/config/color.dart';
 import 'package:tiny_weight/app/config/font.dart';
 import 'package:tiny_weight/app/config/path.dart';
-import 'package:tiny_weight/app/pages/seller_main_logic.dart';
+import 'package:tiny_weight/app/pages/main_logic.dart';
 import 'package:tiny_weight/app/widgets/button.dart';
 import 'package:tiny_weight/app/widgets/scalable.dart';
 import 'package:tiny_weight/app/widgets/uploadpage.dart';
 
-class SellerMainPage extends StatefulWidget {
-  const SellerMainPage({super.key});
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
 
   @override
-  State<SellerMainPage> createState() => _SellerMainPageState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _SellerMainPageState extends State<SellerMainPage>
-    with WidgetsBindingObserver {
-  late final SellerMainLogic logic;
+class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
+  late final MainLogic logic;
 
   @override
   void initState() {
     super.initState();
-    logic = Get.put(SellerMainLogic());
+    logic = Get.put(MainLogic());
   }
 
   @override
@@ -59,7 +58,7 @@ class _SellerMainPageState extends State<SellerMainPage>
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SellerMainLogic>(builder: (model) {
+    return GetBuilder<MainLogic>(builder: (model) {
       return UpdaterPage(Scaffold(
         appBar: kIsWeb
             ? AppBar(

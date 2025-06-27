@@ -10,7 +10,7 @@ import 'package:tiny_weight/app/common/webview/content_webview.dart';
 import 'package:tiny_weight/app/pages/common/scan_code_view.dart';
 import 'package:tiny_weight/app/pages/common/signature_page.dart';
 import 'package:tiny_weight/app/pages/login/login_view.dart';
-import 'package:tiny_weight/app/pages/seller_main_view.dart';
+import 'package:tiny_weight/app/pages/main_view.dart';
 import 'package:tiny_weight/app/service/api_service.dart';
 import 'package:tiny_weight/app/models/user_info/user_info.dart';
 import 'package:tiny_weight/app/widgets/toast.dart';
@@ -88,8 +88,7 @@ class AppHelper {
         await ApiService.init();
         ApiService().clean();
         SharedInfo().clean();
-        Get.offAll(() => const SellerMainPage(),
-            transition: Transition.downToUp);
+        Get.offAll(() => const MainPage(), transition: Transition.downToUp);
       },
       okText: '切換系統'.tr,
       outTouchCancellable: false,
