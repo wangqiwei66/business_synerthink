@@ -13,6 +13,7 @@ import 'package:tiny_weight/app/models/base_logic.dart';
 import 'package:tiny_weight/app/pages/ai_search_view.dart';
 import 'package:tiny_weight/app/pages/mall_view.dart';
 import 'package:tiny_weight/app/pages/setting_view.dart';
+import 'package:tiny_weight/app/pages/organization_view.dart';
 
 class MainLogic extends BaseLogic {
   int currentIndex = 0;
@@ -28,12 +29,7 @@ class MainLogic extends BaseLogic {
       ),
     ),
     AiSearchView(),
-    const Center(
-      child: Text(
-        '組織頁面\n盡請期待',
-        style: TextStyle(fontSize: 20, color: Colors.black),
-      ),
-    ),
+    OrganizationView(),
     SettingView()
   ];
 
