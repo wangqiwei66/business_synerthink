@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/pages/userinfo_view.dart';
-import 'package:tiny_weight/app/widgets/textfeild.dart';
 import 'setting_logic.dart';
 
 class SettingView extends StatelessWidget {
@@ -33,7 +32,7 @@ class SettingView extends StatelessWidget {
                       TextButton(
                         onPressed: () {},
                         child: const Text('成為商家/分會長？按這裡 聯絡我們',
-                            style: TextStyle(color: Colors.blue, fontSize: 13)),
+                            style: TextStyle(color: Colors.blue, fontSize: 12)),
                       ),
                     ],
                   ),

@@ -11,7 +11,7 @@ class UserInfoView extends StatelessWidget {
     final logic = Get.find<MallLogic>();
     return Container(
       color: const Color(0xFF363140),
-      padding: const EdgeInsets.fromLTRB(16, 36, 16, 16),
+      padding: const EdgeInsets.fromLTRB(16, 46, 16, 16),
       child: Row(
         children: [
           const CircleAvatar(
@@ -24,10 +24,12 @@ class UserInfoView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 16),
-                Row(
+                Wrap(
                   children: [
                     Text(
                       logic.userName,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 18,
@@ -35,7 +37,7 @@ class UserInfoView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 8),
-                    const Icon(Icons.diamond, color: Colors.white, size: 20),
+                    const Icon(Icons.diamond, color: Colors.white, size: 20)
                   ],
                 ),
                 const Row(
