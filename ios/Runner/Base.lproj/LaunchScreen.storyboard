@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,13 +20,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
-                                <rect key="frame" x="111.33333333333333" y="220.66666666666669" width="170.66666666666669" height="170.66666666666669"/>
+                                <rect key="frame" x="136.66666666666666" y="246" width="119.99999999999997" height="120"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="29B-hH-MtR"/>
                                     <constraint firstAttribute="width" secondItem="YRO-k0-Ey4" secondAttribute="height" multiplier="1:1" id="6U4-ty-h36"/>
+                                    <constraint firstAttribute="height" constant="120" id="uUi-vT-351"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎使用商聯思維" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aun-pL-ewr">
-                                <rect key="frame" x="76.666666666666686" y="431.33333333333331" width="240" height="29"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商聯思維" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aun-pL-ewr">
+                                <rect key="frame" x="76.666666666666686" y="406" width="240" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="240" id="2p9-R0-5bW"/>
                                     <constraint firstAttribute="height" constant="29" id="fzD-sJ-V2f"/>
@@ -51,6 +53,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="170.66667175292969" height="170.66667175292969"/>
+        <image name="logo" width="40" height="40"/>
     </resources>
 </document>
