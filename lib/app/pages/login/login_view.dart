@@ -207,5 +207,3 @@ class _LoginViewPageState extends State<LoginViewPage> {
     );
   }
 }
-
-class Kcolor {}

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiny_weight/app/config/color.dart';
+import 'package:tiny_weight/app/pages/login/login_view.dart';
 import 'member_center_logic.dart';
 
 class MemberCenterView extends StatelessWidget {
@@ -9,15 +11,34 @@ class MemberCenterView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF23242A),
+      backgroundColor: KColor.backgroundLightColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF23242A),
+        backgroundColor: KColor.backgroundLightColor,
         elevation: 0,
-        title: const Text('會員中心', style: TextStyle(color: Colors.white)),
+        title: const Text('會員中心',
+            style: TextStyle(
+                color: Color(0xFF51185C), fontWeight: FontWeight.bold)),
         centerTitle: true,
+        leading: IconButton(
+          icon: Image.asset('assets/img/home_icon.png', width: 24, height: 24),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_horiz, color: Colors.white),
+            icon: Image.asset('assets/img/earPhone_icon.png',
+                width: 24, height: 24),
+            onPressed: () {
+              Get.back();
+            },
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.more_horiz,
+              color: Colors.red,
+              size: 44,
+            ),
             onPressed: () {},
           ),
         ],
@@ -42,7 +63,7 @@ class MemberCenterView extends StatelessWidget {
                       children: [
                         const Text('CHAN TAI MAN, TAYLOR',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: Colors.black,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16)),
                         const SizedBox(height: 4),

@@ -4,7 +4,8 @@ class KColor {
   static const Color defaultBorderColor = Colors.black38;
   static const Color appbarColor = Colors.purple;
   static const Color boderblueColor = Color.fromARGB(255, 222, 222, 222);
-  static const Color backgroundColor = Color(0xFFFFF7DD);
+  static const Color backgroundLightColor = Color(0xFFF0F4F5);
+  static const Color backgroundDarkColor = Color(0xFF333333);
   static const Color textColor = Color.fromARGB(255, 33, 94, 215);
 
   /// 0xff343434
