@@ -164,7 +164,7 @@ class MemberCenterView extends StatelessWidget {
   /// 構建通知卡片組件
   Widget _buildNotificationCards() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Column(
         children: [
           // 第一行通知卡片
@@ -276,7 +276,7 @@ class MemberCenterView extends StatelessWidget {
             color: iconColor,
             size: 20,
           ),
-          const SizedBox(height: 8),
+          const SizedBox(width: 4),
           Text(
             title,
             style: const TextStyle(
@@ -301,48 +301,235 @@ class MemberCenterView extends StatelessWidget {
     );
   }
 
+  /// 构建组织统计信息卡片
   Widget _buildOrgStats() {
     final data = logic.orgStats;
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              const Icon(Icons.shield, color: Colors.deepPurple),
-              const SizedBox(width: 8),
-              Text('${data['orgName']}',
-                  style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold)),
-              const SizedBox(width: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8),
+              // 左侧盾牌图标
+              Image.asset('${base_img_path}org_icon.png',
+                  width: 60, height: 60),
+
+              const SizedBox(width: 16),
+              // 中间内容区域
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 组织名称和标签
+                    Row(
+                      children: [
+                        const Text(
+                          '所屬組織名稱',
+                          style: TextStyle(
+                            color: Colors.black87,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.orange.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Text(
+                            '組織性質分類',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    // 职位信息
+                    Row(
+                      children: [
+                        const Text(
+                          '組織擔任職銜',
+                          style: TextStyle(
+                            color: Colors.purple,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: Colors.orange.withOpacity(0.2),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Text(
+                            '組織所屬區分',
+                            style: TextStyle(
+                              color: Colors.orange,
+                              fontSize: 10,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                 ),
-                child: const Text('組織總體數據', style: TextStyle(fontSize: 12)),
               ),
-              const Spacer(),
-              const Text('組織目標', style: TextStyle(color: Colors.grey)),
-              const SizedBox(width: 4),
-              Text('${data['target']}',
-                  style: const TextStyle(color: Colors.orange)),
+              // 右侧贡献值
+              Column(
+                children: [
+                  const Text(
+                    '組織貢獻值',
+                    style: TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFB7B9C4),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Center(
+                      child: Text(
+                        '200K',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-          const SizedBox(height: 8),
           Row(
             children: [
-              _buildStatBlock('成員', data['totalMember'].toString()),
-              _buildStatBlock('獎金', data['totalBonus'].toString()),
-              _buildStatBlock('總資產', '\$4,000'), // 这里修正为实际金额
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      '已加入',
+                      style: TextStyle(
+                        color: Color(0xFF333333),
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    RichText(
+                      text: const TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '120',
+                            style: TextStyle(
+                              color: Color(0xFFD99201),
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '天',
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      '會員數目',
+                      style: TextStyle(
+                        color: Color(0xFF333333),
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    RichText(
+                      text: const TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '500',
+                            style: TextStyle(
+                              color: Color(0xFFD99201),
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '位',
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
+          const Row(
+            children: [
+              Text(
+                '共獲取獎金',
+                style: TextStyle(
+                  color: Color(0xFF333333),
+                  fontSize: 12,
+                ),
+              ),
+              SizedBox(width: 8),
+              Text(
+                '\$240,000',
+                style: TextStyle(
+                  color: Color(0xFF65A9BE),
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          )
         ],
       ),
     );
