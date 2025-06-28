@@ -21,15 +21,15 @@ class MemberCenterLogic extends GetxController {
   // 分會数据
   final branchStats = {
     'branchName': '所屬分會名稱',
-    'level': '2.8K',
-    'totalMember': 118,
-    'totalBonus': 563,
-    'totalMoney': 120000,
-    'target': 120000,
-    'a': 563,
-    'b': 112,
-    'c': 203,
-    'd': 302,
+    'branchPosition': '分會擔任職銜',
+    'contributionValue': '52.8K',
+    'joinedDays': 118,
+    'memberCount': 80,
+    'completedTasks': 563,
+    'assistedActivities': 112,
+    'completedTransactions': 203,
+    'participatedActivities': 302,
+    'totalBonus': 120000,
   };
 
   // 商品点评

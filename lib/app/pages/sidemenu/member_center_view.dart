@@ -29,10 +29,10 @@ class MemberCenterView extends StatelessWidget {
               const SizedBox(height: 12),
               // 组织统计
               _buildOrgStats(),
-              const SizedBox(height: 8),
+              const SizedBox(height: 24),
               // 分会统计
               _buildBranchStats(),
-              const SizedBox(height: 12),
+              const SizedBox(height: 24),
               // 快捷入口
               _buildQuickEntry(),
               const SizedBox(height: 12),
@@ -350,10 +350,10 @@ class MemberCenterView extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: Colors.orange.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
+                              // decoration: BoxDecoration(
+                              //   color: Colors.orange.withOpacity(0.2),
+                              //   borderRadius: BorderRadius.circular(4),
+                              // ),
                               child: const Text(
                                 '組織性質分類',
                                 style: TextStyle(
@@ -381,14 +381,14 @@ class MemberCenterView extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 8, vertical: 2),
-                              decoration: BoxDecoration(
-                                color: Colors.orange.withOpacity(0.2),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
+                              // decoration: BoxDecoration(
+                              //   color: Colors.orange.withOpacity(0.2),
+                              //   borderRadius: BorderRadius.circular(4),
+                              // ),
                               child: const Text(
                                 '組織所屬區分',
                                 style: TextStyle(
-                                  color: Colors.orange,
+                                  color: Color(0xFFF5156B),
                                   fontSize: 10,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -554,57 +554,411 @@ class MemberCenterView extends StatelessWidget {
     );
   }
 
+  /// 构建分会统计信息卡片
   Widget _buildBranchStats() {
     final data = logic.branchStats;
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.blue, width: 2),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              const Icon(Icons.shield, color: Colors.teal),
-              const SizedBox(width: 8),
-              Text('${data['branchName']}',
-                  style: const TextStyle(
-                      color: Colors.black, fontWeight: FontWeight.bold)),
-              const SizedBox(width: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Text('分會總體數據', style: TextStyle(fontSize: 12)),
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 4,
+                offset: const Offset(0, 2),
               ),
-              const Spacer(),
-              const Text('分會目標', style: TextStyle(color: Colors.grey)),
-              const SizedBox(width: 4),
-              Text('${data['level']}',
-                  style: const TextStyle(color: Colors.orange)),
             ],
           ),
-          const SizedBox(height: 8),
-          Row(
+          child: Column(
             children: [
-              _buildStatBlock('A', data['a'].toString()),
-              _buildStatBlock('B', data['b'].toString()),
-              _buildStatBlock('C', data['c'].toString()),
-              _buildStatBlock('D', data['d'].toString()),
+              Row(
+                children: [
+                  // 左侧盾牌图标
+                  Image.asset('${base_img_path}sub_icon.png',
+                      width: 60, height: 60),
+                  const SizedBox(width: 16),
+                  // 中间内容区域
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 分会名称和标签
+                        Row(
+                          children: [
+                            const Text(
+                              '所屬分會名稱',
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 2),
+                              // decoration: BoxDecoration(
+                              //   color: Colors.orange.withOpacity(0.2),
+                              //   borderRadius: BorderRadius.circular(4),
+                              // ),
+                              child: const Text(
+                                '分會性質分類',
+                                style: TextStyle(
+                                  color: Colors.orange,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        // 职位信息
+                        Row(
+                          children: [
+                            const Text(
+                              '分會擔任職銜',
+                              style: TextStyle(
+                                color: Colors.purple,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 8, vertical: 2),
+                              // decoration: BoxDecoration(
+                              //   color: Colors.orange.withOpacity(0.2),
+                              //   borderRadius: BorderRadius.circular(4),
+                              // ),
+                              child: const Text(
+                                '分會所屬區分',
+                                style: TextStyle(
+                                  color: Colors.purple,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                      ],
+                    ),
+                  ),
+                  // 右侧贡献值
+                  Column(
+                    children: [
+                      const Text(
+                        '分會貢獻值',
+                        style: TextStyle(
+                          color: Color(0xFF333333),
+                          fontSize: 12,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Container(
+                        width: 60,
+                        height: 60,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFFFB74D),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${data['contributionValue']}',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              // 第一行统计数据
+              Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          '已加入',
+                          style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '${data['joinedDays']}',
+                                style: const TextStyle(
+                                  color: Color(0xFFD99201),
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: '天',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          '會員數目',
+                          style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '${data['memberCount']}',
+                                style: const TextStyle(
+                                  color: Color(0xFFD99201),
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: '位',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              // 第二行统计数据
+              Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          '已完成\n任務數',
+                          style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '${data['completedTasks']}',
+                                style: const TextStyle(
+                                  color: Color(0xFFE91E63),
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: '個',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          '已協助\n活動數',
+                          style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '${data['assistedActivities']}',
+                                style: const TextStyle(
+                                  color: Color(0xFFE91E63),
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: '個',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              // 第三行统计数据
+              Row(
+                children: [
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          '已完成\n交易量',
+                          style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '${data['completedTransactions']}',
+                                style: const TextStyle(
+                                  color: Color(0xFF9C27B0),
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: '個',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          '已參與\n活動數',
+                          style: TextStyle(
+                            color: Color(0xFF333333),
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '${data['participatedActivities']}',
+                                style: const TextStyle(
+                                  color: Color(0xFF9C27B0),
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const TextSpan(
+                                text: '個',
+                                style: TextStyle(
+                                  color: Colors.black87,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              // 共获取奖金
+              Row(
+                children: [
+                  const Text(
+                    '共獲取獎金',
+                    style: TextStyle(
+                      color: Color(0xFF333333),
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    '\$${data['totalBonus'].toString().replaceAllMapped(RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},')}',
+                    style: const TextStyle(
+                      color: Color(0xFF65A9BE),
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
-          const SizedBox(height: 4),
-          const Text('總資產:\$4,000',
-              style:
-                  TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
-        ],
-      ),
+        ),
+        Positioned(
+          top: -8,
+          left: 8,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+            decoration: BoxDecoration(
+              color: const Color(0xFF65A9BE),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Text(
+              '分會資訊',
+              style: TextStyle(fontSize: 11, color: Colors.white),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
