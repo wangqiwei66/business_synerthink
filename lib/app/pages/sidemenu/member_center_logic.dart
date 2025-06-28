@@ -11,6 +11,13 @@ class MemberCenterLogic extends GetxController {
     'target': 200000,
   };
 
+  final List<Map<String, dynamic>> quickActions = [
+    {'icon': 'gift_icon.png', 'label': '人氣商品'},
+    {'icon': 'task_icon.png', 'label': '最新任務'},
+    {'icon': 'hot_icon.png', 'label': '熱門搜索'},
+    {'icon': 'notiofy_icon.png', 'label': '必到活動'},
+    {'icon': 'cooperate_icon.png', 'label': '合作方案'},
+  ];
   // 分會数据
   final branchStats = {
     'branchName': '所屬分會名稱',
