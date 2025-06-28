@@ -9,7 +9,7 @@ class SideMenuView extends StatelessWidget {
     return Align(
       alignment: Alignment.centerRight,
       child: Container(
-        width: 240,
+        width: MediaQuery.of(context).size.width * 2 / 3,
         height: double.infinity,
         decoration: const BoxDecoration(
           color: Color(0xFF868995),
