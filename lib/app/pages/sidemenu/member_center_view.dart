@@ -1002,74 +1002,405 @@ class MemberCenterView extends StatelessWidget {
     );
   }
 
+  /// 构建商品评论区域
   Widget _buildProductReviews() {
     final reviews = logic.productReviews;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('你的商品評論',
-            style: TextStyle(
-                color: Colors.pink, fontWeight: FontWeight.bold, fontSize: 16)),
-        const SizedBox(height: 8),
-        ...reviews.map((r) => Card(
-              margin: const EdgeInsets.symmetric(vertical: 6),
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
+        // 标题
+        RichText(
+          text: const TextSpan(
+            children: [
+              TextSpan(
+                  text: '你的',
+                  style: TextStyle(
+                      color: Color(0xFFF5156B),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+              TextSpan(
+                  text: '商品評論',
+                  style: TextStyle(
+                      color: Color(0xFF51185C),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        // 评论列表
+        ...reviews.map((review) => _buildReviewCard(review)),
+      ],
+    );
+  }
+
+  Container _buildReviewCard(Map<String, Object> review) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 16),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            spreadRadius: 0,
+            blurRadius: 8,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 用户信息
+          Row(
+            children: [
+              Text(
+                '來自商家 #${review['user']}',
+                style: const TextStyle(
+                  color: Color(0xFF616161),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const Spacer(),
+              // 浏览商家和回覆评论按钮
+            ],
+          ),
+          const SizedBox(height: 12),
+          // 商品信息
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 商品图片
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  review['img'].toString(),
+                  width: 80,
+                  height: 80,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      width: 80,
+                      height: 80,
+                      color: Colors.grey[300],
+                      child: const Icon(
+                        Icons.image_not_supported,
+                        color: Colors.grey,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(width: 12),
+              // 商品详情
+              Expanded(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(r['img'].toString(),
-                          width: 60, height: 60, fit: BoxFit.cover),
+                    // 商品标题
+                    Text(
+                      review['title'].toString(),
+                      style: const TextStyle(
+                        color: Colors.black87,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(r['user'].toString(),
-                              style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold)),
-                          Text(r['title'].toString(),
-                              style: const TextStyle(
-                                  color: Colors.black87, fontSize: 13),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis),
-                          Text(r['desc'].toString(),
-                              style: const TextStyle(
-                                  color: Colors.grey, fontSize: 12),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis),
-                          Row(
-                            children: [
-                              Text(r['price'].toString(),
-                                  style: const TextStyle(
-                                      color: Colors.pink,
-                                      fontWeight: FontWeight.bold)),
-                              const SizedBox(width: 8),
-                              ...List.generate(
-                                  r['star']?.toString() != null
-                                      ? int.parse(r['star'].toString())
-                                      : 5,
-                                  (i) => const Icon(Icons.star,
-                                      color: Colors.amber, size: 14)),
-                            ],
-                          ),
-                          Text('評價: ${r['review'] ?? ''}',
-                              style: const TextStyle(
-                                  color: Colors.black54, fontSize: 12),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis),
-                        ],
+                    const SizedBox(height: 4),
+                    // 数量和型号
+                    Text(
+                      '數量: 10',
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      '已選擇型號/顏色:',
+                      style: TextStyle(
+                        color: Colors.grey[600],
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      '請輸入商品型號1(如顏色、尺寸)',
+                      style: TextStyle(
+                        color: Colors.grey[500],
+                        fontSize: 11,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    // 价格
+                    Text(
+                      review['price'].toString(),
+                      style: const TextStyle(
+                        color: Color(0xFFE91E63),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
                 ),
               ),
-            )),
-      ],
+            ],
+          ),
+          const SizedBox(height: 12),
+          // 配送服务
+          Row(
+            children: [
+              Text(
+                '已選配送服務:',
+                style: TextStyle(
+                  color: Colors.grey[700],
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.green[100],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  '送貨上門',
+                  style: TextStyle(
+                    color: Colors.green[700],
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // 商品状态
+          Row(
+            children: [
+              Text(
+                '商品狀態:',
+                style: TextStyle(
+                  color: Colors.grey[700],
+                  fontSize: 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.green[100],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  '已確認收貨',
+                  style: TextStyle(
+                    color: Colors.green[700],
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // 配送地址
+          Text(
+            '配送地址: 香港九龍尖沙咀北京道1號12樓08室',
+            style: TextStyle(
+              color: Colors.grey[700],
+              fontSize: 12,
+            ),
+          ),
+          const SizedBox(height: 12),
+          // 买家评价标题
+          Text(
+            '買家評價:',
+            style: TextStyle(
+              color: Colors.grey[800],
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          // 评价内容
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.blue[50],
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: Colors.blue[200]!,
+                width: 1,
+              ),
+            ),
+            child: Text(
+              '評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。',
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 12,
+                height: 1.4,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+          // 评分
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 描述相符
+              Row(
+                children: [
+                  Text(
+                    '描述相符:',
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  ...List.generate(
+                      4,
+                      (index) => const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                            size: 16,
+                          )),
+                  const Icon(
+                    Icons.star_border,
+                    color: Colors.grey,
+                    size: 16,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              // 商家服务
+              Row(
+                children: [
+                  Text(
+                    '商家服務:',
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  ...List.generate(
+                      5,
+                      (index) => const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                            size: 16,
+                          )),
+                ],
+              ),
+              const SizedBox(height: 4),
+              // 物流配送
+              Row(
+                children: [
+                  Text(
+                    '物流配送:',
+                    style: TextStyle(
+                      color: Colors.grey[700],
+                      fontSize: 12,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  ...List.generate(
+                      5,
+                      (index) => const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                            size: 16,
+                          )),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          // 商家回覆
+          Text(
+            '商家回覆:',
+            style: TextStyle(
+              color: Colors.grey[800],
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: Colors.grey[300]!,
+                width: 1,
+              ),
+            ),
+            child: Text(
+              '回覆內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。評價內容欄，限250字元。',
+              style: TextStyle(
+                color: Colors.grey[700],
+                fontSize: 12,
+                height: 1.4,
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Container(
+                height: 35,
+                width: 112,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                color: const Color(0xFF9747FF),
+                child: const Center(
+                  child: Text(
+                    '瀏覽商家',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 35,
+                width: 112,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                color: const Color(0xFFF5156B),
+                child: const Center(
+                  child: Text(
+                    '回覆評論',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 
