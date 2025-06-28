@@ -12,18 +12,22 @@ class SettingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          const UserInfoView(),
-          Expanded(
-            child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const UserInfoView(),
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('個人設置',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  const Row(
+                    children: [
+                      Text('個人設置',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                    ],
+                  ),
                   Row(
                     children: [
                       const Text('您的UID: #33669980',
@@ -89,14 +93,14 @@ class SettingView extends StatelessWidget {
                                   TextStyle(fontSize: 16, color: Colors.white)),
                         ),
                       ),
+                      const SizedBox(height: 32),
                     ],
-                  ),
-                  const SizedBox(height: 32),
+                  )
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

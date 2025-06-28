@@ -13,54 +13,48 @@ class OrganizationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFEF8F9),
-      body: Column(
-        children: [
-          const UserInfoView(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 32),
-                  Image.asset(
-                    'assets/img/info_icon.png',
-                    width: 80,
-                    height: 80,
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    '尚未參與任何組織',
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black54,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 32),
-                  _buildCard(
-                    imagepath: 'createOrg.png',
-                    title: '創建組織',
-                    subtitle: '創建組織條件',
-                    desc: '用戶必須持有分會，為該分會的分會長，並已繳付分會長加盟費用。詳情可聯絡我們線上客服。',
-                  ),
-                  _buildCard(
-                    imagepath: 'addOrg.png',
-                    title: '加入組織',
-                    subtitle: '加入分會條件',
-                    desc:
-                        '用戶必須持有分會，為該分會的分會長，並已繳付分會長加盟費用。繳付成功後，系統開放商家會員後即可按左方圖示加入任何您感興趣的組織。',
-                  ),
-                  _buildCard(
-                    imagepath: 'searchOrg.png',
-                    title: '組織搜索',
-                    subtitle: '組織搜索',
-                    desc:
-                        '用戶亦可進入組織搜索版面，設定篩選條件，搜尋你想加入的組織。加入組織後所有分會會員自動歸為該分會所隸屬的組織之成員。詳情可聯絡我們線上客服。',
-                  ),
-                  const SizedBox(height: 60),
-                ],
-              ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const UserInfoView(),
+            const SizedBox(height: 32),
+            Image.asset(
+              'assets/img/info_icon.png',
+              width: 80,
+              height: 80,
             ),
-          ),
-        ],
+            const SizedBox(height: 16),
+            const Text(
+              '尚未參與任何組織',
+              style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.black54,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 32),
+            _buildCard(
+              imagepath: 'createOrg.png',
+              title: '創建組織',
+              subtitle: '創建組織條件',
+              desc: '用戶必須持有分會，為該分會的分會長，並已繳付分會長加盟費用。詳情可聯絡我們線上客服。',
+            ),
+            _buildCard(
+              imagepath: 'addOrg.png',
+              title: '加入組織',
+              subtitle: '加入分會條件',
+              desc:
+                  '用戶必須持有分會，為該分會的分會長，並已繳付分會長加盟費用。繳付成功後，系統開放商家會員後即可按左方圖示加入任何您感興趣的組織。',
+            ),
+            _buildCard(
+              imagepath: 'searchOrg.png',
+              title: '組織搜索',
+              subtitle: '組織搜索',
+              desc:
+                  '用戶亦可進入組織搜索版面，設定篩選條件，搜尋你想加入的組織。加入組織後所有分會會員自動歸為該分會所隸屬的組織之成員。詳情可聯絡我們線上客服。',
+            ),
+            const SizedBox(height: 60),
+          ],
+        ),
       ),
     );
   }

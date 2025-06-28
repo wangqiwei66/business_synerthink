@@ -21,31 +21,25 @@ class _ActivityViewState extends State<ActivityView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFEF8F9),
-      body: Column(
-        children: [
-          const UserInfoView(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _buildTitleBar(),
-                  _buildCalendar(),
-                  _buildTips(),
-                  _buildSection('跨分會活動'),
-                  ...logic.crossChapterActivities
-                      .map((e) => _buildActivityCardItem(e))
-                      .toList(),
-                  _buildSection('分會活動'),
-                  ...logic.chapterActivities
-                      .map((e) => _buildActivityCardItem(e))
-                      .toList(),
-                  const SizedBox(height: 80),
-                ],
-              ),
-            ),
-          ),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const UserInfoView(),
+            _buildTitleBar(),
+            _buildCalendar(),
+            _buildTips(),
+            _buildSection('跨分會活動'),
+            ...logic.crossChapterActivities
+                .map((e) => _buildActivityCardItem(e))
+                .toList(),
+            _buildSection('分會活動'),
+            ...logic.chapterActivities
+                .map((e) => _buildActivityCardItem(e))
+                .toList(),
+            const SizedBox(height: 80),
+          ],
+        ),
       ),
     );
   }
