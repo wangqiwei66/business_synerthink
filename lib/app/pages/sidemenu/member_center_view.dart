@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/config/color.dart';
+import 'package:tiny_weight/app/config/path.dart';
 import 'package:tiny_weight/app/pages/login/login_view.dart';
+import 'package:tiny_weight/app/widgets/divider.dart';
 import 'member_center_logic.dart';
 
 class MemberCenterView extends StatelessWidget {
@@ -12,37 +14,7 @@ class MemberCenterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: KColor.backgroundLightColor,
-      appBar: AppBar(
-        backgroundColor: KColor.backgroundLightColor,
-        elevation: 0,
-        title: const Text('會員中心',
-            style: TextStyle(
-                color: Color(0xFF51185C), fontWeight: FontWeight.bold)),
-        centerTitle: true,
-        leading: IconButton(
-          icon: Image.asset('assets/img/home_icon.png', width: 24, height: 24),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: Image.asset('assets/img/earPhone_icon.png',
-                width: 24, height: 24),
-            onPressed: () {
-              Get.back();
-            },
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.more_horiz,
-              color: Colors.red,
-              size: 44,
-            ),
-            onPressed: () {},
-          ),
-        ],
-      ),
+      appBar: _buildAppBar(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -50,52 +22,10 @@ class MemberCenterView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // 头像与基本信息
-              Row(
-                children: [
-                  const CircleAvatar(
-                    radius: 32,
-                    backgroundImage: AssetImage('assets/img/about_me_icon.png'),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('CHAN TAI MAN, TAYLOR',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16)),
-                        const SizedBox(height: 4),
-                        Row(
-                          children: [
-                            Text(logic.orgStats['level'].toString(),
-                                style: const TextStyle(
-                                    color: Colors.white70, fontSize: 13)),
-                            const SizedBox(width: 8),
-                            const Icon(Icons.diamond,
-                                color: Colors.white, size: 14),
-                          ],
-                        ),
-                        const SizedBox(height: 2),
-                        Text(logic.orgStats['orgName'].toString(),
-                            style: const TextStyle(
-                                color: Colors.white70, fontSize: 13)),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: const Text('等級 1',
-                        style: TextStyle(color: Colors.white)),
-                  ),
-                ],
-              ),
+              _buildBaseInfoView(),
+              const SizedBox(height: 4),
+              // 通知卡片
+              _buildNotificationCards(),
               const SizedBox(height: 12),
               // 组织统计
               _buildOrgStats(),
@@ -114,6 +44,259 @@ class MemberCenterView extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildBaseInfoView() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            const CircleAvatar(
+              radius: 32,
+              backgroundImage: AssetImage('assets/img/about_me_icon.png'),
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text('CHAN TAI MAN, TAYLOR',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16)),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      Text(logic.orgStats['level'].toString(),
+                          style: const TextStyle(
+                              color: Color(0xFF888B94), fontSize: 13)),
+                      const SizedBox(width: 8),
+                      const Icon(Icons.diamond,
+                          color: Color(0xFF888B94), size: 14),
+                      const Spacer(),
+                      const Text('尚餘 10000 貢獻升至等級 2',
+                          style: TextStyle(
+                              color: Color(0xFF888B94), fontSize: 12)),
+                      const SizedBox(
+                        width: 12,
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 2),
+                  Container(
+                    height: 12,
+                    margin: const EdgeInsets.symmetric(vertical: 4),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(6),
+                      child: TweenAnimationBuilder<double>(
+                        tween: Tween<double>(begin: 0, end: 0.2), // 進度值從0到0.7
+                        duration: const Duration(milliseconds: 500),
+                        builder: (context, value, child) {
+                          return LinearProgressIndicator(
+                            value: value,
+                            backgroundColor: const Color(0xFFD9D9D9),
+                            valueColor: const AlwaysStoppedAnimation<Color>(
+                                Color(0xFF8F3CCA)),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Image.asset(
+                '${base_img_path}current_right_icon.png',
+                width: 56,
+                height: 56,
+              ),
+            ),
+          ],
+        ),
+        CzDivider(
+          margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
+          width: double.infinity,
+          height: 2,
+        ),
+      ],
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      backgroundColor: KColor.backgroundLightColor,
+      elevation: 0,
+      title: const Text('會員中心',
+          style:
+              TextStyle(color: Color(0xFF51185C), fontWeight: FontWeight.bold)),
+      centerTitle: true,
+      leading: IconButton(
+        icon: Image.asset('assets/img/home_icon.png', width: 24, height: 24),
+        onPressed: () {
+          Get.back();
+        },
+      ),
+      actions: [
+        IconButton(
+          icon: Image.asset('assets/img/earPhone_icon.png',
+              width: 24, height: 24),
+          onPressed: () {
+            Get.back();
+          },
+        ),
+        IconButton(
+          icon: const Icon(
+            Icons.more_horiz,
+            color: Colors.red,
+            size: 44,
+          ),
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+
+  /// 構建通知卡片組件
+  Widget _buildNotificationCards() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Column(
+        children: [
+          // 第一行通知卡片
+          Row(
+            children: [
+              Expanded(
+                child: _buildNotificationCard(
+                  icon: Icons.message,
+                  iconColor: const Color(0xFF4FC3F7),
+                  title: '你有 99+ 條訊息未讀',
+                  actionText: '前往 >>',
+                  onTap: () {
+                    // 處理點擊事件
+                  },
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _buildNotificationCard(
+                  icon: Icons.schedule,
+                  iconColor: const Color(0xFF4FC3F7),
+                  title: '分會活動於 30 天後舉行',
+                  actionText: '前往 >>',
+                  onTap: () {
+                    // 處理點擊事件
+                  },
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // 第二行通知卡片
+          Row(
+            children: [
+              Expanded(
+                child: _buildNotificationCard(
+                  icon: Icons.shopping_cart,
+                  iconColor: const Color(0xFF26C6DA),
+                  title: '你有 99+ 個商品未結賬',
+                  actionText: '前往 >>',
+                  onTap: () {
+                    // 處理點擊事件
+                  },
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _buildNotificationCard(
+                  icon: Icons.star,
+                  iconColor: const Color(0xFFFF6B6B),
+                  title: '我已收藏的商品',
+                  actionText: '前往 >>',
+                  onTap: () {
+                    // 處理點擊事件
+                  },
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          // 第三行通知卡片
+          Row(
+            children: [
+              Expanded(
+                child: _buildNotificationCard(
+                  icon: Icons.assignment,
+                  iconColor: const Color(0xFFFF6B6B),
+                  title: '你有 99+ 個未完成任務',
+                  actionText: '前往 >>',
+                  onTap: () {
+                    // 處理點擊事件
+                  },
+                ),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: _buildNotificationCard(
+                  icon: Icons.info,
+                  iconColor: const Color(0xFFFF6B6B),
+                  title: '你有 20 個新評價',
+                  actionText: '前往 >>',
+                  onTap: () {
+                    // 處理點擊事件
+                  },
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 構建單個通知卡片
+  Widget _buildNotificationCard({
+    required IconData icon,
+    required Color iconColor,
+    required String title,
+    required String actionText,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            color: iconColor,
+            size: 20,
+          ),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            style: const TextStyle(
+              color: Color(0xFF888B94),
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const Spacer(),
+          Text(
+            actionText,
+            style: const TextStyle(
+              color: Color(0xFF9C27B0),
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+            ),
+          )
+        ],
       ),
     );
   }
