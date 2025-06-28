@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/config/color.dart';
 import 'package:tiny_weight/app/config/path.dart';
@@ -1233,33 +1234,18 @@ class MemberCenterView extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(height: 20),
           // 打开活动日历按钮
           Center(
             child: GestureDetector(
               onTap: () {
                 // TODO: 实现打开活动日历功能
-                Get.snackbar('提示', '打開活動日曆功能待實現');
+                EasyLoading.showInfo('打開活動日曆功能待實現');
               },
               child: Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFE91E63), Color(0xFF9C27B0)],
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
-                  borderRadius: BorderRadius.circular(25),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0xFFE91E63).withOpacity(0.3),
-                      spreadRadius: 0,
-                      blurRadius: 8,
-                      offset: const Offset(0, 4),
-                    ),
-                  ],
+                width: 120,
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFF5156B),
                 ),
                 child: const Text(
                   '打開活動日曆',
@@ -1273,6 +1259,9 @@ class MemberCenterView extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(
+            height: 40,
+          )
         ],
       ),
     );
