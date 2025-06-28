@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/config/color.dart';
 import 'package:tiny_weight/app/config/path.dart';
@@ -1071,56 +1072,160 @@ class MemberCenterView extends StatelessWidget {
     );
   }
 
+  /// 构建近期活动区域
   Widget _buildRecentActivities() {
     final acts = logic.recentActivities;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text('近期活動',
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 16)),
-        const SizedBox(height: 8),
-        SizedBox(
-          height: 110,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
+    return Container(
+      padding: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 标题和地区筛选
+          Row(
+            children: [
+              // 近期活动标题
+              RichText(
+                text: const TextSpan(
+                  children: [
+                    TextSpan(
+                        text: '近期',
+                        style: TextStyle(
+                            color: Color(0xFFF5156B),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold)),
+                    TextSpan(
+                        text: '活動',
+                        style: TextStyle(
+                            color: Color(0xFF51185C),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              // 地区筛选标签
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: logic.locationFilters.map((location) {
+                    return Obx(() {
+                      final isSelected =
+                          logic.selectedLocation.value == location;
+                      return GestureDetector(
+                        onTap: () => logic.selectedLocation.value = location,
+                        child: Container(
+                          height: 20,
+                          margin: const EdgeInsets.only(right: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 0),
+                          decoration: BoxDecoration(
+                            color: isSelected
+                                ? const Color(0xFF51185C)
+                                : const Color(0xFFD7CBDA),
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              color: isSelected
+                                  ? const Color(0xFFBDBDBD)
+                                  : Colors.grey[300]!,
+                            ),
+                          ),
+                          child: Text(
+                            location,
+                            style: TextStyle(
+                              color: isSelected ? Colors.white : Colors.black87,
+                              fontSize: 12,
+                              fontWeight: isSelected
+                                  ? FontWeight.w500
+                                  : FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      );
+                    });
+                  }).toList(),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          // 活动卡片网格
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              // childAspectRatio: 1.2,
+            ),
             itemCount: acts.length,
-            separatorBuilder: (_, __) => const SizedBox(width: 8),
-            itemBuilder: (context, i) {
-              final a = acts[i];
+            itemBuilder: (context, index) {
+              final activity = acts[index];
               return Container(
-                width: 120,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  // color: Colors.white,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(8),
-                          topRight: Radius.circular(8)),
-                      child: Image.asset(a['img'] ?? '',
-                          width: 120, height: 60, fit: BoxFit.cover),
+                    // 活动图片
+                    Expanded(
+                      flex: 7,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                        child: Image.asset(
+                          activity['img'] ?? '',
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[300],
+                              child: const Icon(
+                                Icons.image_not_supported,
+                                color: Colors.grey,
+                                size: 30,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(6),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(a['title'] ?? '',
+                    // 活动信息
+                    Expanded(
+                      flex: 3,
+                      child: Padding(
+                        padding: const EdgeInsets.all(0),
+                        child: Column(
+                          children: [
+                            // Text(
+                            //   activity['title'] ?? '',
+                            //   style: const TextStyle(
+                            //     color: Colors.black87,
+                            //     fontSize: 12,
+                            //     fontWeight: FontWeight.w600,
+                            //   ),
+                            //   maxLines: 2,
+                            //   overflow: TextOverflow.ellipsis,
+                            // ),
+                            // const SizedBox(height: 2),
+                            Text(
+                              activity['desc'] ?? '',
                               style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold)),
-                          Text(a['desc'] ?? '',
-                              style: const TextStyle(
-                                  color: Colors.grey, fontSize: 12),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis),
-                        ],
+                                color: Color(0xFF333333),
+                                fontSize: 10,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -1128,8 +1233,48 @@ class MemberCenterView extends StatelessWidget {
               );
             },
           ),
-        ),
-      ],
+          const SizedBox(height: 20),
+          // 打开活动日历按钮
+          Center(
+            child: GestureDetector(
+              onTap: () {
+                // TODO: 实现打开活动日历功能
+                Get.snackbar('提示', '打開活動日曆功能待實現');
+              },
+              child: Container(
+                width: double.infinity,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFFE91E63), Color(0xFF9C27B0)],
+                    begin: Alignment.centerLeft,
+                    end: Alignment.centerRight,
+                  ),
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color(0xFFE91E63).withOpacity(0.3),
+                      spreadRadius: 0,
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: const Text(
+                  '打開活動日曆',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

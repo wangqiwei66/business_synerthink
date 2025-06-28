@@ -64,33 +64,45 @@ class MemberCenterLogic extends GetxController {
   final recentActivities = [
     {
       'img': 'assets/img/banner1.jpg',
-      'title': '活動標題1',
-      'desc': '活動描述1',
+      'title': '[香港] 活動主題顯示文字',
+      'desc': '顯示文字只限兩行，顯示文字隻顯示兩行. 過了就不顯示了. ',
+      'location': '香港',
     },
     {
       'img': 'assets/img/banner2.jpg',
-      'title': '活動標題2',
-      'desc': '活動描述2',
+      'title': '[香港] 活動主題顯示文字',
+      'desc': '顯示文字只限兩行，顯示文字隻顯示兩行. 過了就不顯示了. ',
+      'location': '香港',
     },
     {
       'img': 'assets/img/banner3.jpg',
-      'title': '活動標題3',
-      'desc': '活動描述3',
+      'title': '[香港] 活動主題顯示文字',
+      'desc': '顯示文字只限兩行，顯示文字隻顯示兩行. 過了就不顯示了. ',
+      'location': '香港',
     },
     {
-      'img': 'assets/img/activity_BG.png',
-      'title': '活動標題4',
-      'desc': '活動描述4',
+      'img': 'assets/img/meal1.jpg',
+      'title': '[香港] 活動主題顯示文字',
+      'desc': '顯示文字只限兩行，顯示文字隻顯示兩行. 過了就不顯示了. ',
+      'location': '香港',
     },
     {
-      'img': 'assets/img/ajjl_normal.png',
-      'title': '活動標題5',
-      'desc': '活動描述5',
+      'img': 'assets/img/meal3.jpg',
+      'title': '[香港] 活動主題顯示文字',
+      'desc': '顯示文字只限兩行，顯示文字隻顯示兩行. 過了就不顯示了. ',
+      'location': '香港',
     },
     {
-      'img': 'assets/img/amount_icon.png',
-      'title': '活動標題6',
-      'desc': '活動描述6',
+      'img': 'assets/img/meal2.jpg',
+      'title': '[香港] 活動主題顯示文字',
+      'desc': '顯示文字只限兩行，顯示文字隻顯示兩行. 過了就不顯示了. ',
+      'location': '香港',
     },
   ];
+
+  // 地区筛选选项
+  final locationFilters = ['香港', '九龍', '新界'];
+
+  // 当前选中的地区
+  var selectedLocation = '香港'.obs;
 }
