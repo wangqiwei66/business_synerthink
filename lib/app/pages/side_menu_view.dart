@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tiny_weight/app/pages/sidemenu/member_center_view.dart';
 
 class SideMenuView extends StatelessWidget {
   const SideMenuView({super.key});
@@ -127,16 +128,26 @@ class SideMenuView extends StatelessWidget {
                     '常見問題',
                     '客服及支援',
                     '登入及驗證',
-                  ].map((item) => Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            item,
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400),
+                  ].map((item) => InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          if (item == '會員中心') {
+                            Get.to(() => MemberCenterView());
+                          } else {
+                            Get.log('side menu 點擊了 $item');
+                          }
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400),
+                            ),
                           ),
                         ),
                       )),
