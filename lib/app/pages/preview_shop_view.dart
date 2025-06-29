@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'preview_shop_logic.dart';
 import 'userinfo_view.dart';
@@ -18,9 +19,6 @@ class PreviewShopView extends StatelessWidget {
           children: [
             // 顶部用户信息区域
             const UserInfoView(),
-
-            // 主要内容区域
-
             // 商店信息卡片
             _buildStoreInfoCard(logic),
 
@@ -44,7 +42,15 @@ class PreviewShopView extends StatelessWidget {
             // 我的賣家訊息卡片
             _buildSellerInfoCard(logic),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 12),
+
+            // 我的商品部分
+            _buildMyProductsSection(logic),
+
+            const SizedBox(height: 12),
+
+            // 子商城商品部分
+            _buildSubStoreProductsSection(logic),
           ],
         ),
       ),
@@ -166,7 +172,7 @@ class PreviewShopView extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 4),
         ],
       ),
     );
@@ -217,7 +223,7 @@ class PreviewShopView extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black87,
+                            color: Colors.black,
                           ),
                         )),
                     const SizedBox(height: 4),
@@ -290,6 +296,254 @@ class PreviewShopView extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 构建我的商品部分
+  Widget _buildMyProductsSection(PreviewShopLogic logic) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 标题栏
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text(
+                '我的商品',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(
+                width: 12,
+              ),
+              GestureDetector(
+                onTap: () {
+                  EasyLoading.showInfo('管理商品功能待實現');
+                },
+                child: const Text(
+                  '管理商品>>',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF004DA1),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          // 商品网格 (3列2行)
+
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 0.75,
+              crossAxisSpacing: 6,
+              mainAxisSpacing: 6,
+            ),
+            itemCount: logic.products.length > 6 ? 6 : logic.products.length,
+            itemBuilder: (context, index) {
+              final product = logic.products[index];
+              return _buildProductCard(product, logic);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 构建单个商品卡片
+  Widget _buildProductCard(ProductModel product, PreviewShopLogic logic) {
+    return GestureDetector(
+      onTap: () => logic.onProductTap(product),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black.withOpacity(0.1),
+          //     blurRadius: 4,
+          //     offset: const Offset(0, 2),
+          //   ),
+          // ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // 商品图片和分类标签
+            Expanded(
+              flex: 3,
+              child: Stack(
+                children: [
+                  // 商品图片
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage(product.imageUrl),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  // 分类标签
+                  Positioned(
+                    top: 8,
+                    left: 8,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.7),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        product.category,
+                        style: const TextStyle(
+                          fontSize: 8,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // 商品信息
+            Expanded(
+              flex: 2,
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 商品标题
+                    Text(
+                      product.title,
+                      style: const TextStyle(
+                        fontSize: 10,
+                        color: Colors.black87,
+                        height: 1.2,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+
+                    const Spacer(),
+
+                    // 价格和销量
+                    Row(
+                      children: [
+                        // 价格
+                        Text(
+                          product.price,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.pink,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacer(),
+                        // 销量
+                        Text(
+                          product.soldCount,
+                          style: const TextStyle(
+                            fontSize: 8,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 2),
+
+                    // // 原价
+                    // Text(
+                    //   product.originalPrice,
+                    //   style: const TextStyle(
+                    //     fontSize: 8,
+                    //     color: Colors.grey,
+                    //     decoration: TextDecoration.lineThrough,
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// 构建子商城商品部分
+  Widget _buildSubStoreProductsSection(PreviewShopLogic logic) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 标题栏
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text(
+                '子商城商品',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(
+                width: 12,
+              ),
+              GestureDetector(
+                onTap: () {
+                  EasyLoading.showInfo('管理商品功能待實現');
+                },
+                child: const Text(
+                  '管理商品>>',
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF004DA1),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          // 商品网格 (3列2行)
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              childAspectRatio: 0.75,
+              crossAxisSpacing: 6,
+              mainAxisSpacing: 6,
+            ),
+            itemCount: logic.subStoreProducts.length > 6
+                ? 6
+                : logic.subStoreProducts.length,
+            itemBuilder: (context, index) {
+              final product = logic.subStoreProducts[index];
+              return _buildProductCard(product, logic);
+            },
           ),
         ],
       ),
