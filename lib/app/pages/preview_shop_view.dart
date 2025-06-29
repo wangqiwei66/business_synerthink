@@ -347,7 +347,7 @@ class PreviewShopView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              childAspectRatio: 0.75,
+              childAspectRatio: 0.7,
               crossAxisSpacing: 6,
               mainAxisSpacing: 6,
             ),
@@ -535,7 +535,7 @@ class PreviewShopView extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,
-              childAspectRatio: 0.75,
+              childAspectRatio: 0.7,
               crossAxisSpacing: 6,
               mainAxisSpacing: 6,
             ),
