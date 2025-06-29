@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tiny_weight/app/pages/userinfo_view.dart';
+import 'preview_shop_view.dart';
 import 'setting_logic.dart';
 
 class SettingView extends StatelessWidget {
@@ -87,7 +88,9 @@ class SettingView extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 32, vertical: 0),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(() => const PreviewShopView());
+                          },
                           child: const Text('預覽商店頁',
                               style:
                                   TextStyle(fontSize: 16, color: Colors.white)),

@@ -1573,7 +1573,8 @@ class MemberCenterView extends StatelessWidget {
                 EasyLoading.showInfo('打開活動日曆功能待實現');
               },
               child: Container(
-                width: 120,
+                height: 35,
+                width: 112,
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 decoration: const BoxDecoration(
                   color: Color(0xFFF5156B),
