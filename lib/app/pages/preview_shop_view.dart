@@ -342,6 +342,7 @@ class PreviewShopView extends StatelessWidget {
           // 商品网格 (3列2行)
 
           GridView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 12),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -529,6 +530,7 @@ class PreviewShopView extends StatelessWidget {
           ),
           // 商品网格 (3列2行)
           GridView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 12),
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
