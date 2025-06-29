@@ -51,6 +51,16 @@ class PreviewShopView extends StatelessWidget {
 
             // 子商城商品部分
             _buildSubStoreProductsSection(logic),
+
+            const SizedBox(height: 12),
+
+            // 我的评价区块
+            _buildMyReviewsSection(logic),
+
+            const SizedBox(height: 24),
+
+            // 底部操作按钮
+            _buildBottomButtons(context),
           ],
         ),
       ),
@@ -548,6 +558,284 @@ class PreviewShopView extends StatelessWidget {
             },
           ),
         ],
+      ),
+    );
+  }
+
+  /// 构建我的评价区块
+  Widget _buildMyReviewsSection(PreviewShopLogic logic) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text(
+                '我的評價  (999+)',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
+              const SizedBox(width: 8),
+              GestureDetector(
+                onTap: () {
+                  EasyLoading.showInfo('查看更多功能待實現');
+                },
+                child: const Text(
+                  '查看更多>>',
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Color(0xFF004DA1),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          ListView.builder(
+            padding: const EdgeInsets.symmetric(vertical: 0),
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: logic.reviews.length,
+            itemBuilder: (context, index) {
+              final review = logic.reviews[index];
+              return _buildReviewCard(review);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 构建单条评价卡片
+  Widget _buildReviewCard(ReviewModel review) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 18),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.07),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              // CircleAvatar(
+              //   radius: 18,
+              //   backgroundImage: AssetImage(review.userAvatar),
+              // ),
+              // const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  '來自用戶 ${review.userName}',
+                  style: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w500),
+                ),
+              ),
+              Text(
+                review.reviewTime,
+                style: const TextStyle(fontSize: 11, color: Colors.grey),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Image.asset(
+                  review.productImage,
+                  width: 60,
+                  height: 60,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      review.productTitle,
+                      style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF6B1FAF)),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 2),
+                    Row(
+                      children: [
+                        Text('數量: ${review.productCount}',
+                            style: const TextStyle(
+                                fontSize: 11, color: Colors.black87)),
+                        const SizedBox(width: 8),
+                        Text(review.productStatus,
+                            style: const TextStyle(
+                                fontSize: 11, color: Color(0xFF00B96B))),
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      review.productPrice,
+                      style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.pink,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              const Text('配送狀態: ',
+                  style: TextStyle(fontSize: 11, color: Colors.black87)),
+              Text(review.productStatus,
+                  style:
+                      const TextStyle(fontSize: 11, color: Color(0xFF00B96B))),
+              const SizedBox(width: 8),
+              const Text('配送地址: ',
+                  style: TextStyle(fontSize: 11, color: Colors.black87)),
+              Expanded(
+                child: Text(
+                  review.deliveryAddress,
+                  style: const TextStyle(fontSize: 11, color: Colors.black87),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '評價內容: ${review.reviewContent}',
+            style: const TextStyle(
+                fontSize: 12, color: Colors.black87, height: 1.3),
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+          ),
+          const SizedBox(height: 6),
+          Column(
+            children: [
+              Row(
+                children: [
+                  const Text('描述相符: ',
+                      style: TextStyle(fontSize: 11, color: Colors.black87)),
+                  _buildStarRow(review.productScore),
+                ],
+              ),
+              const SizedBox(width: 8),
+              Row(
+                children: [
+                  const Text('商家服務: ',
+                      style: TextStyle(fontSize: 11, color: Colors.black87)),
+                  _buildStarRow(review.serviceScore),
+                ],
+              ),
+              const SizedBox(width: 8),
+              Row(
+                children: [
+                  const Text('物流配送: ',
+                      style: TextStyle(fontSize: 11, color: Colors.black87)),
+                  _buildStarRow(review.logisticsScore),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 构建星级评分
+  Widget _buildStarRow(int score) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(
+          5,
+          (i) => Icon(
+                Icons.star,
+                size: 13,
+                color: i < score
+                    ? const Color(0xFFFFB800)
+                    : const Color(0xFFE0E0E0),
+              )),
+    );
+  }
+
+  /// 底部操作按钮
+  Widget _buildBottomButtons(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 48, top: 0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // 返回修改按钮
+          _buildGradientButton(
+            text: '返回修改',
+            onTap: () {
+              Navigator.of(context).maybePop();
+            },
+            gradient: const LinearGradient(
+              colors: [Color(0xFF2B174C), Color(0xFF2B174C)],
+            ),
+          ),
+          const SizedBox(width: 32),
+          // 储存商店页按钮
+          _buildGradientButton(
+            text: '儲存商店頁',
+            onTap: () {
+              EasyLoading.showSuccess('商品基本設定已儲存');
+            },
+            gradient: const LinearGradient(
+              colors: [Color(0xFFB13AFF), Color(0xFFEC3C8B)],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  /// 通用渐变圆角按钮
+  Widget _buildGradientButton({
+    required String text,
+    required VoidCallback onTap,
+    required Gradient gradient,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 2),
+        decoration: BoxDecoration(
+          gradient: gradient,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Text(
+          text,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
     );
   }

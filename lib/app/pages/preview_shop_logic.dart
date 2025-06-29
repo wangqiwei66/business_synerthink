@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 /// 商品数据模型
@@ -16,6 +17,43 @@ class ProductModel {
     required this.soldCount,
     required this.imageUrl,
     required this.category,
+  });
+}
+
+/// 用户评价数据模型
+class ReviewModel {
+  final String userName;
+  final String userId;
+  final String userAvatar;
+  final String productTitle;
+  final String productImage;
+  final String productPrice;
+  final String productCount;
+  final String productStatus;
+  final String deliveryType;
+  final String deliveryAddress;
+  final String reviewContent;
+  final int productScore;
+  final int serviceScore;
+  final int logisticsScore;
+  final String reviewTime;
+
+  ReviewModel({
+    required this.userName,
+    required this.userId,
+    required this.userAvatar,
+    required this.productTitle,
+    required this.productImage,
+    required this.productPrice,
+    required this.productCount,
+    required this.productStatus,
+    required this.deliveryType,
+    required this.deliveryAddress,
+    required this.reviewContent,
+    required this.productScore,
+    required this.serviceScore,
+    required this.logisticsScore,
+    required this.reviewTime,
   });
 }
 
@@ -139,6 +177,46 @@ class PreviewShopLogic extends GetxController {
     ),
   ].obs;
 
+  // 用户评价 mock 数据
+  final reviews = <ReviewModel>[
+    ReviewModel(
+      userName: 'CHAN SIU MAN, CHRISTINA',
+      userId: 'CHAN SIU MAN, CHRISTINA',
+      userAvatar: 'assets/img/about_me_icon.png',
+      productTitle: '[展示] 商品標題欄，限制文字30字元以內，超出字數系統自動隱藏多',
+      productImage: 'assets/img/meal1.jpg',
+      productPrice: 'HKD 9,999',
+      productCount: '10',
+      productStatus: '已確認收貨',
+      deliveryType: '送貨上門',
+      deliveryAddress: '香港九龍深水埗北京道1號12樓08室',
+      reviewContent:
+          'R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。',
+      productScore: 4,
+      serviceScore: 5,
+      logisticsScore: 5,
+      reviewTime: '2025-06-29',
+    ),
+    ReviewModel(
+      userName: '用戶#F33669980',
+      userId: 'F33669980',
+      userAvatar: 'assets/img/about_me_icon.png',
+      productTitle: '[展示] 商品標題欄，限制文字30字元以內，超出字數系統自動隱藏多',
+      productImage: 'assets/img/meal2.jpg',
+      productPrice: 'HKD 9,999',
+      productCount: '10',
+      productStatus: '已確認收貨',
+      deliveryType: '自提點取',
+      deliveryAddress: '香港九龍深水埗北京道1號12樓08室',
+      reviewContent:
+          'R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。R已250字元。',
+      productScore: 5,
+      serviceScore: 4,
+      logisticsScore: 5,
+      reviewTime: '2025-06-28',
+    ),
+  ].obs;
+
   // 按钮点击事件
   void onContactButtonPressed() {
     Get.snackbar('聯絡', '聯絡賣家功能待實現');
@@ -150,6 +228,6 @@ class PreviewShopLogic extends GetxController {
 
   /// 商品点击事件
   void onProductTap(ProductModel product) {
-    Get.snackbar('商品', '點擊了商品: ${product.title}');
+    EasyLoading.showInfo('點擊了商品: ${product.title}');
   }
 }
